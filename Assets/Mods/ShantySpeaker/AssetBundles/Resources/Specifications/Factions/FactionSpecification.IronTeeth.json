@@ -1,0 +1,8 @@
+{
+  "Buildings#append": [
+    "Buildings/Decorations/ShantySpeaker/ShantySpeaker.IronTeeth"
+  ],
+  "Needs#append": [
+    "ShantySpeaker"
+  ]
+}

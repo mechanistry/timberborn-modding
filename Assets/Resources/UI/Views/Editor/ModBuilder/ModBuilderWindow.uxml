@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
+    <Style src="/Assets/Resources/UI/Views/Editor/ModBuilder/ModBuilderStyle.uss" />
+    <ui:VisualElement name="ModBuilderWindow">
+        <ui:VisualElement name="ButtonsWrapper" class="mod-builder-window__buttons">
+            <ui:Button name="SelectAll" text="Select all" />
+            <ui:Button name="DeselectAll" text="Deselect all" />
+            <ui:Button name="Refresh" text="Refresh" />
+        </ui:VisualElement>
+        <ui:ScrollView name="ModList" />
+        <ui:Label name="NoModsLabel" text="No mods found" class="mod-builder-window__no-mods-label" />
+        <ui:VisualElement name="ButtonsWrapper" class="mod-builder-window__buttons">
+            <ui:Button name="BuildSelected" text="Build" />
+        </ui:VisualElement>
+        <ui:VisualElement name="WarningContainer" class="mod-builder-window__warning-container">
+            <ui:Label name="WarningLabel" text="Warning: All data for chosen mods in Documents/Timberborn/Mods will be deleted." class="mod-builder-window__warning-label" />
+            <ui:VisualElement name="WarningButtons" class="mod-builder-window__warning-buttons">
+                <ui:Button name="Build" text="Build anyway" />
+                <ui:Button name="Cancel" text="Abort" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

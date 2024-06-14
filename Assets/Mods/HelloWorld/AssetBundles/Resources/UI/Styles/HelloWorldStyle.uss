@@ -1,0 +1,14 @@
+.hello-world__wrapper {
+    flex-grow: 1;
+}
+
+.hello-world__label {
+    color: rgb(241, 0, 0);
+    -unity-font-style: bold;
+    align-self: flex-end;
+    justify-content: flex-start;
+    position: absolute;
+    bottom: 50px;
+    right: 10px;
+    height: 20px;
+}

@@ -1,0 +1,9 @@
+{
+  "Name": "Hello World",
+  "Version": "0.1",
+  "Id": "Timberborn.ModExamples.HelloWorld",
+  "MinimumGameVersion": "0.0.0.0",
+  "Description": "A simple mod that shows the programming classic on the screen.",
+  "RequiredMods": [
+  ]
+}

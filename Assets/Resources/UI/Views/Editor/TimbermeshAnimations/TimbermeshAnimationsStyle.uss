@@ -1,0 +1,74 @@
+.controller-box {
+    padding: 4px;
+    margin: 2px;
+    background-color: #4d4d4d;
+}
+
+.controller-box__label {
+    margin-left: 2px;
+}
+
+.controller-validation__button {
+    margin-bottom: 4px;
+}
+
+.animator-state {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.animator-state__row {
+    flex-direction: row;
+    align-items: stretch;
+    align-content: stretch;
+    margin-bottom: 1px;
+    margin-right: 2px;
+}
+
+.animator-state__row-label {
+    width: 70px;
+    align-self: center;
+}
+
+.animator-state__row-left-element {
+    flex-grow: 1;
+    min-width: 100px;
+    margin-left: 4px;
+}
+
+.animator-state__row-right-element {
+    width: 70px;
+    margin-left: 10px;
+    align-self: center;
+}
+
+.animator-state__row-speed {
+    width: 36px;
+    margin-right: 10px;
+    padding-left: 1px;
+}
+
+.animator-state__row-modifier-label {
+    width: 42px;
+    margin-left: 10px;
+    margin-right: 10px;
+    align-self: center;
+}
+
+.animator-state-condition {
+    flex-direction: row;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.animator-state-condition__dropdown {
+    flex-grow: 1;
+    min-width: 100px;
+    margin-left: 4px;
+}
+
+.animator-state-condition__toggle {
+    width: 16px;
+    margin-left: 10px;
+    margin-right: 4px;
+}

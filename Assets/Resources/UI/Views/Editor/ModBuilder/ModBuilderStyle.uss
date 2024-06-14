@@ -1,0 +1,33 @@
+.mod-builder-window__buttons {
+    flex-direction: row;
+    margin: 5px
+}
+
+.mod-builder-window__no-mods-label {
+    margin: 8px;
+}
+
+.mod-item {
+    flex-direction: row;
+    align-items: center;
+    margin: 1px 0 1px 5px;
+}
+
+.mod-builder-window__warning-container {
+    border-width: 1px;
+    border-color: rgb(89, 89, 89);
+    background-color: rgb(36, 36, 36);
+    padding: 5px;
+    margin: 5px;
+    align-items: center;
+}
+
+.mod-builder-window__warning-label {
+    color: red;
+    padding: 2px 8px;
+    white-space: normal;
+}
+
+.mod-builder-window__warning-buttons {
+    flex-direction: row;
+}
