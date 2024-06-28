@@ -2,7 +2,7 @@
   "ItemId": "3275060459",
   "Name": "Shanty Speaker",
   "Visibility": "Public",
-  "UpdateDescription": true,
-  "UpdateVisibility": true,
-  "UpdatePreview": true
+  "UpdateDescription": false,
+  "UpdateVisibility": false,
+  "UpdatePreview": false
 }
