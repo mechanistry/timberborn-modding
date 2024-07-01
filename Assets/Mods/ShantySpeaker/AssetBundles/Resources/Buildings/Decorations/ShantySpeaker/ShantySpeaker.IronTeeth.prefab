@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2207535408146693131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1942782917, guid: e411f370ff9218aecea3afcfd2179be1, type: 3}
+  m_Script: {fileID: -1942782917, guid: 40833514e55bcf2135fbcf9411078554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _modelName: Buildings\Decorations\ShantySpeaker\ShantySpeaker.IronTeeth.Model
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -790041461, guid: 5c21feef08e31abac3e1b0eb5dafa121, type: 3}
+  m_Script: {fileID: -790041461, guid: 1bd6ccb667024f9c2b77daf7f62a4eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _selectionSoundName: Default
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -460516431, guid: 5c21feef08e31abac3e1b0eb5dafa121, type: 3}
+  m_Script: {fileID: -460516431, guid: 1bd6ccb667024f9c2b77daf7f62a4eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _finishedModel: {fileID: 2207535408146693131}
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -731835049, guid: 0d3c5cf5f998e91e7181d04674fa5aed, type: 3}
+  m_Script: {fileID: -731835049, guid: b5f268a4cb31a93ed707a95d3a502b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabName: ShantySpeaker.IronTeeth
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1800879565, guid: 0ddc39fbde65f9d729893d0e841bc4e9, type: 3}
+  m_Script: {fileID: 1800879565, guid: c1ff95bb5ae0e8b420075ec58add6f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _blocksSpecification:
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -871492198, guid: 0ddc39fbde65f9d729893d0e841bc4e9, type: 3}
+  m_Script: {fileID: -871492198, guid: c1ff95bb5ae0e8b420075ec58add6f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _toolGroupId: Decoration
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1115175677, guid: 0d3c5cf5f998e91e7181d04674fa5aed, type: 3}
+  m_Script: {fileID: -1115175677, guid: b5f268a4cb31a93ed707a95d3a502b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _displayNameLocKey: Building.ShantySpeaker.DisplayName
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 338473558, guid: 88695931522e25f78d245426de62b0e9, type: 3}
+  m_Script: {fileID: 338473558, guid: 7b595fe4f2a0f156a0cd8601a325161a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &-5247507068609296265
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1115272012, guid: bdeeb4371e3a57d1670f4503e8673bd2, type: 3}
+  m_Script: {fileID: -1115272012, guid: 75be7af0b34ada5bff62a949a3c4181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _effectRadius: 8
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1933139831, guid: bdeeb4371e3a57d1670f4503e8673bd2, type: 3}
+  m_Script: {fileID: 1933139831, guid: 75be7af0b34ada5bff62a949a3c4181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _effectSpecifications:
@@ -395,7 +395,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5828752212518718586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1942782917, guid: e411f370ff9218aecea3afcfd2179be1, type: 3}
+  m_Script: {fileID: -1942782917, guid: 40833514e55bcf2135fbcf9411078554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _modelName: ConstructionSites\ConstructionSite1x1\ConstructionSite1x1.Model

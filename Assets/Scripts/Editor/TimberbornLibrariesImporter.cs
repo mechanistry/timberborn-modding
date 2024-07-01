@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -60,14 +61,11 @@ namespace ModBuilding.Editor {
       return false;
     }
 
-    private static string GenerateGuid(string inputString) {
-      var guid = new StringBuilder();
-      using HashAlgorithm algorithm = SHA256.Create();
-      var hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
-      for (var index = 0; index < 16; index++) {
-        guid.Append(index < hash.Length ? hash[index].ToString("X2") : "00");
-      }
-      return guid.ToString();
+    private static string GenerateGuid(string fileName) {
+      using var md5 = MD5.Create();
+      var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+      var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(fileNameWithoutExtension));
+      return new Guid(hash).ToString().ToLower().Replace("-", "");
     }
 
   }
