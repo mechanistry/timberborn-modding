@@ -7,8 +7,10 @@
             <ui:Button name="Refresh" text="Refresh" />
         </ui:VisualElement>
         <ui:Label name="ModsLabel" text="Mods:" class="mod-builder-window__mods-label" />
-        <ui:ScrollView name="ModList" class="mod-builder-window__mod-list mod-builder-window__controls-margin " />
-        <ui:Label name="NoModsLabel" text="No mods found" class="mod-builder-window__no-mods-label" />
+        <ui:VisualElement name="ModListWrapper" class="mod-builder-window__mod-list-wrapper mod-builder-window__controls-margin">
+            <ui:ScrollView name="ModList" />
+            <ui:Label name="NoModsLabel" text="No mods found" class="mod-builder-window__no-mods-label" />
+        </ui:VisualElement>
         <ui:TabView name="BuildTabView" class="mod-builder-window__controls-margin mod-builder-window__controls-wrapper">
             <ui:Tab name="DevBuildTab" label="Dev build" class="mod-builder-window__tab">
                 <ui:Toggle name="CodeToggle" text="Build code" />
