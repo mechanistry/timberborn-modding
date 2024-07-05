@@ -33,10 +33,10 @@ namespace ModBuilding.Editor {
 
       var destinationPath = Path.Combine(modDirectory.FullName, AssetBundlesDirectory);
       Directory.CreateDirectory(destinationPath);
-      if(modBuilderSettings.BuildWindowsAssetBundle) {
+      if (modBuilderSettings.BuildWindowsAssetBundle) {
         BuildWinAssetBundle(modDefinition, assetsToBundle, destinationPath);
       }
-      if(modBuilderSettings.BuildMacAssetBundle) {
+      if (modBuilderSettings.BuildMacAssetBundle) {
         BuildMacAssetBundle(modDefinition, assetsToBundle, destinationPath);
       }
       File.Delete(Path.Combine(destinationPath, AssetBundlesDirectory));

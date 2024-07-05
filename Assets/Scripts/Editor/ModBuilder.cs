@@ -26,7 +26,7 @@ namespace ModBuilding.Editor {
     private readonly AssetsCopier _assetsCopier = new();
     private readonly DllFilesCopier _dllFilesCopier = new();
 
-    public ModBuilder(IEnumerable<ModDefinition> modDefinitions, 
+    public ModBuilder(IEnumerable<ModDefinition> modDefinitions,
                       ModBuilderSettings modBuilderSettings) {
       _modDefinitions = modDefinitions.ToList();
       _modBuilderSettings = modBuilderSettings;
@@ -60,7 +60,7 @@ namespace ModBuilding.Editor {
       if (_modBuilderSettings.BuildCode) {
         _dllFilesCopier.CopyBuiltDllFiles(modDefinition, modDirectory, buildPath);
       }
-      if(_modBuilderSettings.BuildWindowsAssetBundle || _modBuilderSettings.BuildMacAssetBundle) {
+      if (_modBuilderSettings.BuildWindowsAssetBundle || _modBuilderSettings.BuildMacAssetBundle) {
         _assetBundleBuilder.Build(modDefinition, modDirectory, _modBuilderSettings);
       }
     }
@@ -68,18 +68,15 @@ namespace ModBuilding.Editor {
     private DirectoryInfo CreateModDirectory(ModDefinition modDefinition) {
       var modsDirectory = Path.Combine(UserDataFolder, GameModsDirectory);
       var directoryPath = Path.Combine(modsDirectory, modDefinition.Name);
-      if (_modBuilderSettings.DeleteFiles) {
-        var workshopFileInfo = new FileInfo(Path.Combine(directoryPath, WorkshopDataFile));
-        var workshopData = string.Empty;
-        if (workshopFileInfo.Exists) {
-          workshopData = File.ReadAllText(workshopFileInfo.FullName);
-        }
-        if (Directory.Exists(directoryPath)) {
-          Directory.Delete(directoryPath, true);
-        }
+      if (_modBuilderSettings.DeleteFiles && Directory.Exists(directoryPath)) {
+        var workshopFilePath = Path.Combine(directoryPath, WorkshopDataFile);
+        var workshopData = File.Exists(workshopFilePath)
+            ? File.ReadAllText(workshopFilePath)
+            : string.Empty;
+        Directory.Delete(directoryPath, true);
         var modDirectory = Directory.CreateDirectory(directoryPath);
         if (!string.IsNullOrEmpty(workshopData)) {
-          File.WriteAllText(Path.Combine(directoryPath, WorkshopDataFile), workshopData);
+          File.WriteAllText(workshopFilePath, workshopData);
         }
         return modDirectory;
       }

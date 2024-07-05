@@ -19,7 +19,7 @@ namespace ModBuilding.Editor {
     }
 
     private bool TryGetTimberbornLibrariesOnMac(out DirectoryInfo librariesDirectory) {
-      var buildPath = EditorUtility.OpenFilePanel("Open Timberborn app", 
+      var buildPath = EditorUtility.OpenFilePanel("Open Timberborn app",
                                                   GetSavedBuildPath(), "app");
       _timberbornPathPersistence.SavePath(buildPath);
       librariesDirectory = new(Path.Combine(buildPath, "Contents", "Resources", "Data", "Managed"));
@@ -45,7 +45,7 @@ namespace ModBuilding.Editor {
       }
       return false;
     }
-    
+
     private string GetSavedBuildPath() {
       return _timberbornPathPersistence.TryGetPath(out var path) ? path : string.Empty;
     }
