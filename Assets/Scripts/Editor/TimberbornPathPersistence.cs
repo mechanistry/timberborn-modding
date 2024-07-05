@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 
 namespace ModBuilding.Editor {
-  public class TimberbornPathPersistence {
+  internal class TimberbornPathPersistence {
 
     private static readonly string TimberbornPathKey = "TimberbornPath";
 

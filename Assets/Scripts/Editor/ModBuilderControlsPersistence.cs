@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace ModBuilding.Editor {
-  public class ModBuilderControlsPersistence {
+  internal class ModBuilderControlsPersistence {
 
     private static readonly string EditorPrefsKey = "ModBuilderControlsPersistence";
     private static readonly string ModEnabledKey = "ModBuilderWindow.ModEnabled.{0}";

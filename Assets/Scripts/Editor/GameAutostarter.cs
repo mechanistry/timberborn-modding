@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
 
 namespace ModBuilding.Editor {
-  public class GameAutostarter {
+  internal class GameAutostarter {
 
     private readonly ModBuilderControlsPersistence _modBuilderControlsPersistence = new();
     private Toggle _autostartToggle;

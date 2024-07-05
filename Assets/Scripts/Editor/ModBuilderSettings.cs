@@ -6,10 +6,10 @@
     public bool BuildMacAssetBundle { get; }
     public bool DeleteFiles { get; }
 
-    public ModBuilderSettings(bool buildCode, 
-                             bool buildWindowsAssetBundle, 
-                             bool buildMacAssetBundle, 
-                             bool deleteFiles) {
+    public ModBuilderSettings(bool buildCode,
+                              bool buildWindowsAssetBundle,
+                              bool buildMacAssetBundle,
+                              bool deleteFiles) {
       BuildCode = buildCode;
       BuildWindowsAssetBundle = buildWindowsAssetBundle;
       BuildMacAssetBundle = buildMacAssetBundle;
