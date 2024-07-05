@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System.IO;
+using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace ModBuilding.Editor {
@@ -6,6 +8,7 @@ namespace ModBuilding.Editor {
 
     private static readonly string EditorPrefsKey = "ModBuilderControlsPersistence";
     private static readonly string ModEnabledKey = "ModBuilderWindow.ModEnabled.{0}";
+    private readonly TimberbornPathPersistence _timberbornPathPersistence = new();
 
     public void InitializeControls(Toggle buildCode, Toggle buildWindowsAssetBundle,
                                    Toggle buildMacAssetBundle, Toggle autostartToggle,
@@ -25,6 +28,9 @@ namespace ModBuilding.Editor {
       autostartToggle.RegisterValueChangedCallback(
           evt => EditorPrefs.SetBool(GetKey(autostartToggle.name), evt.newValue));
       gamePath.value = EditorPrefs.GetString(GetKey(gamePath.name), "");
+      if (string.IsNullOrEmpty(gamePath.value)) {
+        gamePath.value = GetSavedExecutablePath();
+      }
       gamePath.RegisterValueChangedCallback(
           evt => EditorPrefs.SetString(GetKey(gamePath.name), evt.newValue));
       settlementName.value = EditorPrefs.GetString(GetKey(settlementName.name), "");
@@ -34,21 +40,30 @@ namespace ModBuilding.Editor {
       saveName.RegisterValueChangedCallback(
           evt => EditorPrefs.SetString(GetKey(saveName.name), evt.newValue));
     }
-    
+
     public void SetModEnabled(ModDefinition modDefinition, bool enabled) {
-        EditorPrefs.SetBool(GetModEnabledKey(modDefinition), enabled);
+      EditorPrefs.SetBool(GetModEnabledKey(modDefinition), enabled);
     }
-    
+
     public bool IsModEnabled(ModDefinition modDefinition) {
-        return EditorPrefs.GetBool(GetModEnabledKey(modDefinition), true);
+      return EditorPrefs.GetBool(GetModEnabledKey(modDefinition), true);
     }
-    
+
     private static string GetModEnabledKey(ModDefinition modDefinition) {
-        return string.Format(ModEnabledKey, modDefinition.Name);
+      return string.Format(ModEnabledKey, modDefinition.Name);
     }
 
     private static string GetKey(string controlName) {
       return $"{EditorPrefsKey}.{controlName}";
+    }
+
+    private string GetSavedExecutablePath() {
+      if (_timberbornPathPersistence.TryGetPath(out var path)) {
+        return Application.platform == RuntimePlatform.OSXEditor
+            ? path
+            : Path.Combine(path, "Timberborn.exe");
+      }
+      return string.Empty;
     }
 
   }

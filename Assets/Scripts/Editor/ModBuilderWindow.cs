@@ -61,20 +61,21 @@ namespace ModBuilding.Editor {
       _modBuilderControlsPersistence.InitializeControls(_buildCode, _buildWindowsAssetBundle,
                                                         _buildMacAssetBundle, _autostartToggle,
                                                         _gamePath, _settlementName, _saveName);
+      ToggleDisplayStyle(autostartValues, _autostartToggle.value);
       RefreshMods();
     }
 
     private static void ToggleDisplayStyle(VisualElement visualElement, bool visible) {
       visualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
-    
+
     private void SetModsEnabledState(bool enabled) {
       foreach (var mod in GetMods(false)) {
         _modBuilderControlsPersistence.SetModEnabled(mod, enabled);
       }
       RefreshMods();
     }
-    
+
     private void RefreshMods() {
       _modList.Clear();
       foreach (var mod in GetMods(false)) {
