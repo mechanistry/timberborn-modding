@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Debug = UnityEngine.Debug;
 
 namespace ModBuilding.Editor {
   internal class ModBuilderWindow : EditorWindow {
@@ -12,15 +10,12 @@ namespace ModBuilding.Editor {
     private static readonly string ModsDirectory = "Assets/Mods";
     private static readonly string ModManifest = "manifest.json";
     private readonly ModBuilderControlsPersistence _modBuilderControlsPersistence = new();
+    private readonly GameAutostarter _gameAutostarter = new();
     private ScrollView _modList;
     private Label _noModsLabel;
     private Toggle _buildCode;
     private Toggle _buildWindowsAssetBundle;
     private Toggle _buildMacAssetBundle;
-    private Toggle _autostartToggle;
-    private TextField _gamePath;
-    private TextField _settlementName;
-    private TextField _saveName;
 
     [MenuItem("Timberborn/Show Mod Builder", false, 0)]
     public static void ShowWindow() {
@@ -50,18 +45,9 @@ namespace ModBuilding.Editor {
       rootVisualElement.Q<Button>("CleanBuildButton")
           .RegisterCallback<ClickEvent>(_ => RunCleanBuild());
 
-      _autostartToggle = rootVisualElement.Q<Toggle>("AutostartToggle");
-      var autostartValues = rootVisualElement.Q<VisualElement>("AutostartValues");
-      _autostartToggle.RegisterValueChangedCallback(
-          evt => ToggleDisplayStyle(autostartValues, evt.newValue));
-
-      _gamePath = rootVisualElement.Q<TextField>("GamePath");
-      _settlementName = rootVisualElement.Q<TextField>("SettlementName");
-      _saveName = rootVisualElement.Q<TextField>("SaveName");
-      _modBuilderControlsPersistence.InitializeControls(_buildCode, _buildWindowsAssetBundle,
-                                                        _buildMacAssetBundle, _autostartToggle,
-                                                        _gamePath, _settlementName, _saveName);
-      ToggleDisplayStyle(autostartValues, _autostartToggle.value);
+      _modBuilderControlsPersistence.InitializeBuildControls(_buildCode, _buildWindowsAssetBundle,
+                                                             _buildMacAssetBundle);
+      _gameAutostarter.Initialize(rootVisualElement);
       RefreshMods();
     }
 
@@ -124,32 +110,9 @@ namespace ModBuilding.Editor {
 
     private void RunBuild(ModBuilderSettings modBuilderSettings) {
       var result = new ModBuilder(GetMods(true), modBuilderSettings).Build();
-      if (result && _autostartToggle.value) {
-        StartGame();
+      if (result) {
+        _gameAutostarter.StartGameIfEnabled();
       }
-    }
-
-    private void StartGame() {
-      var gamePath = _gamePath.value;
-      if (new FileInfo(gamePath).Exists) {
-        var processStartInfo = new ProcessStartInfo(gamePath) {
-            WindowStyle = ProcessWindowStyle.Normal,
-            Arguments = GetStartArguments()
-        };
-        Process.Start(processStartInfo);
-      } else {
-        Debug.Log($"Game path does not exist: {gamePath}");
-      }
-    }
-
-    private string GetStartArguments() {
-      var settlementName = _settlementName.value;
-      var saveName = _saveName.value;
-      if (string.IsNullOrEmpty(settlementName) || string.IsNullOrEmpty(saveName)) {
-        return string.Empty;
-      }
-
-      return $"-settlementName \"{settlementName}\" -saveName \"{saveName}\"";
     }
 
   }

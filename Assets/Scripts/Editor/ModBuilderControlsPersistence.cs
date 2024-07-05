@@ -10,10 +10,8 @@ namespace ModBuilding.Editor {
     private static readonly string ModEnabledKey = "ModBuilderWindow.ModEnabled.{0}";
     private readonly TimberbornPathPersistence _timberbornPathPersistence = new();
 
-    public void InitializeControls(Toggle buildCode, Toggle buildWindowsAssetBundle,
-                                   Toggle buildMacAssetBundle, Toggle autostartToggle,
-                                   TextField gamePath, TextField settlementName,
-                                   TextField saveName) {
+    public void InitializeBuildControls(Toggle buildCode, Toggle buildWindowsAssetBundle,
+                                        Toggle buildMacAssetBundle) {
       buildCode.value = EditorPrefs.GetBool(GetKey(buildCode.name), true);
       buildCode.RegisterValueChangedCallback(
           evt => EditorPrefs.SetBool(GetKey(buildCode.name), evt.newValue));
@@ -24,6 +22,10 @@ namespace ModBuilding.Editor {
       buildMacAssetBundle.value = EditorPrefs.GetBool(GetKey(buildMacAssetBundle.name), true);
       buildMacAssetBundle.RegisterValueChangedCallback(
           evt => EditorPrefs.SetBool(GetKey(buildMacAssetBundle.name), evt.newValue));
+    }
+
+    public void InitializeAutostartControls(Toggle autostartToggle, TextField gamePath,
+                                            TextField settlementName, TextField saveName) {
       autostartToggle.value = EditorPrefs.GetBool(GetKey(autostartToggle.name), false);
       autostartToggle.RegisterValueChangedCallback(
           evt => EditorPrefs.SetBool(GetKey(autostartToggle.name), evt.newValue));
