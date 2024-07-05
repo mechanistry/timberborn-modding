@@ -11,7 +11,7 @@ namespace ModBuilding.Editor {
 
     private static readonly string ModsDirectory = "Assets/Mods";
     private static readonly string ModManifest = "manifest.json";
-    private static readonly string ModEnabledKey = "ModBuilderWindow.ModEnabled.{0}";
+    private readonly ModBuilderControlsPersistence _modBuilderControlsPersistence = new();
     private ScrollView _modList;
     private Label _noModsLabel;
     private Toggle _buildCode;
@@ -54,34 +54,27 @@ namespace ModBuilding.Editor {
       var autostartValues = rootVisualElement.Q<VisualElement>("AutostartValues");
       _autostartToggle.RegisterValueChangedCallback(
           evt => ToggleDisplayStyle(autostartValues, evt.newValue));
-      ToggleDisplayStyle(autostartValues, _autostartToggle.value);
 
       _gamePath = rootVisualElement.Q<TextField>("GamePath");
       _settlementName = rootVisualElement.Q<TextField>("SettlementName");
       _saveName = rootVisualElement.Q<TextField>("SaveName");
-
+      _modBuilderControlsPersistence.InitializeControls(_buildCode, _buildWindowsAssetBundle,
+                                                        _buildMacAssetBundle, _autostartToggle,
+                                                        _gamePath, _settlementName, _saveName);
       RefreshMods();
     }
 
     private static void ToggleDisplayStyle(VisualElement visualElement, bool visible) {
       visualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
-
-    private static void SetModEnabled(ModDefinition modDefinition, bool enabled) {
-      EditorPrefs.SetBool(GetModEnabledKey(modDefinition), enabled);
-    }
-
-    private static string GetModEnabledKey(ModDefinition modDefinition) {
-      return string.Format(ModEnabledKey, modDefinition.Name);
-    }
-
+    
     private void SetModsEnabledState(bool enabled) {
       foreach (var mod in GetMods(false)) {
-        SetModEnabled(mod, enabled);
+        _modBuilderControlsPersistence.SetModEnabled(mod, enabled);
       }
       RefreshMods();
     }
-
+    
     private void RefreshMods() {
       _modList.Clear();
       foreach (var mod in GetMods(false)) {
@@ -90,7 +83,7 @@ namespace ModBuilding.Editor {
       ToggleDisplayStyle(_noModsLabel, _modList.childCount == 0);
     }
 
-    private static IEnumerable<ModDefinition> GetMods(bool enabledOnly) {
+    private IEnumerable<ModDefinition> GetMods(bool enabledOnly) {
       var projectPath = Path.GetDirectoryName(Application.dataPath);
       foreach (var modFolder in AssetDatabase.GetSubFolders(ModsDirectory)) {
         var manifestPath = $"{modFolder}/{ModManifest}";
@@ -98,23 +91,20 @@ namespace ModBuilding.Editor {
         if (manifestAsset) {
           var modDefinition = new ModDefinition(modFolder.Replace(ModsDirectory + "/", ""),
                                                 modFolder, $"{projectPath}/{modFolder}");
-          if (!enabledOnly || IsModEnabled(modDefinition)) {
+          if (!enabledOnly || _modBuilderControlsPersistence.IsModEnabled(modDefinition)) {
             yield return modDefinition;
           }
         }
       }
     }
 
-    private static bool IsModEnabled(ModDefinition modDefinition) {
-      return EditorPrefs.GetBool(GetModEnabledKey(modDefinition), true);
-    }
-
     private VisualElement AddModItem(ModDefinition modDefinition) {
       var toggle = new Toggle {
-          value = IsModEnabled(modDefinition),
+          value = _modBuilderControlsPersistence.IsModEnabled(modDefinition),
           text = modDefinition.Name
       };
-      toggle.RegisterValueChangedCallback(evt => SetModEnabled(modDefinition, evt.newValue));
+      toggle.RegisterValueChangedCallback(
+          evt => _modBuilderControlsPersistence.SetModEnabled(modDefinition, evt.newValue));
       return toggle;
     }
 

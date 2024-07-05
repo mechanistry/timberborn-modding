@@ -1,5 +1,5 @@
 ﻿namespace ModBuilding.Editor {
-  internal readonly struct ModDefinition {
+  public readonly struct ModDefinition {
 
     public string Name { get; }
     public string ProjectPath { get; }
