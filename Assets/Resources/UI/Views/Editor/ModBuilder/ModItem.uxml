@@ -1,7 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
-    <Style src="/Assets/Resources/UI/Views/Editor/ModBuilder/ModBuilderStyle.uss" />
-    <ui:VisualElement name="ModItem" class="mod-item">
-        <ui:Toggle name="BuildToggle" />
-        <ui:Label name="ModName" text="Mod Name" />
-    </ui:VisualElement>
-</ui:UXML>

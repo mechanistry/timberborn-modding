@@ -1,22 +1,25 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
     <Style src="/Assets/Resources/UI/Views/Editor/ModBuilder/ModBuilderStyle.uss" />
     <ui:VisualElement name="ModBuilderWindow">
-        <ui:VisualElement name="ButtonsWrapper" class="mod-builder-window__buttons">
+        <ui:VisualElement name="ButtonsWrapper" class="mod-builder-window__buttons mod-builder-window__controls-wrapper">
             <ui:Button name="SelectAll" text="Select all" />
             <ui:Button name="DeselectAll" text="Deselect all" />
             <ui:Button name="Refresh" text="Refresh" />
         </ui:VisualElement>
-        <ui:ScrollView name="ModList" />
+        <ui:Label name="ModsLabel" text="Mods:" class="mod-builder-window__mods-label" />
+        <ui:ScrollView name="ModList" class="mod-builder-window__mod-list mod-builder-window__controls-margin " />
         <ui:Label name="NoModsLabel" text="No mods found" class="mod-builder-window__no-mods-label" />
-        <ui:VisualElement name="ButtonsWrapper" class="mod-builder-window__buttons">
-            <ui:Button name="BuildSelected" text="Build" />
-        </ui:VisualElement>
-        <ui:VisualElement name="WarningContainer" class="mod-builder-window__warning-container">
-            <ui:Label name="WarningLabel" text="Warning: All data for chosen mods in Documents/Timberborn/Mods will be deleted." class="mod-builder-window__warning-label" />
-            <ui:VisualElement name="WarningButtons" class="mod-builder-window__warning-buttons">
-                <ui:Button name="Build" text="Build anyway" />
-                <ui:Button name="Cancel" text="Abort" />
-            </ui:VisualElement>
-        </ui:VisualElement>
+        <ui:TabView name="BuildTabView" class="mod-builder-window__controls-margin mod-builder-window__controls-wrapper">
+            <ui:Tab name="DevBuildTab" label="Dev build" class="mod-builder-window__tab">
+                <ui:Toggle name="CodeToggle" text="Build code" />
+                <ui:Toggle name="WindowsAssetBundleToggle" text="Build Windows AssetBundle" />
+                <ui:Toggle name="MacAssetBundleToggle" text="Build macOS AssetBundle" />
+                <ui:Button name="DevBuildButton" text="Build" class="mod-builder-window__build-button" />
+            </ui:Tab>
+            <ui:Tab name="CleanBuildTab" label="Clean build" class="mod-builder-window__tab">
+                <ui:Label name="WarningLabel" text="Warning: All data for chosen mods in Documents/Timberborn/Mods will be deleted." class="mod-builder-window__warning-label" />
+                <ui:Button name="CleanBuildButton" text="Build" class="mod-builder-window__build-button" />
+            </ui:Tab>
+        </ui:TabView>
     </ui:VisualElement>
 </ui:UXML>

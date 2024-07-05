@@ -18,7 +18,7 @@ namespace ModBuilding.Editor {
         var dllDestination = Path.Combine(modDirectory.FullName, GameModDllDirectory);
         Directory.CreateDirectory(dllDestination);
         var dllDestinationPath = Path.Combine(dllDestination, $"{asmdefName}.dll");
-        File.Copy(dllSourcePath, dllDestinationPath);
+        File.Copy(dllSourcePath, dllDestinationPath, true);
       }
     }
 

@@ -3,14 +3,33 @@
     margin: 5px
 }
 
+.mod-builder-window__controls-wrapper {
+    flex-shrink: 0;
+}
+
 .mod-builder-window__no-mods-label {
     margin: 8px;
 }
 
-.mod-item {
-    flex-direction: row;
-    align-items: center;
-    margin: 1px 0 1px 5px;
+.mod-builder-window__mods-label {
+    margin-left: 5px;
+}
+
+.mod-builder-window__mod-list {
+    border-width: 1px;
+    border-color: rgb(89, 89, 89);
+    padding: 5px;
+}
+
+.mod-builder-window__controls-margin {
+    margin: 5px
+}
+
+.mod-builder-window__tab {
+    border-width: 1px;
+    border-color: rgb(89, 89, 89);
+    background-color: rgb(50, 50, 50);
+    padding: 5px;
 }
 
 .mod-builder-window__warning-container {
@@ -28,6 +47,14 @@
     white-space: normal;
 }
 
-.mod-builder-window__warning-buttons {
-    flex-direction: row;
+.mod-builder-window__build-button {
+    align-self: center;
+}
+
+.mod-builder-window__label > .unity-label {
+    width: 150px;
+}
+
+.mod-builder-window__autostart-wrapper {
+    margin: 15px;
 }

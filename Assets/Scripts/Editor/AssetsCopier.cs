@@ -9,7 +9,7 @@ namespace ModBuilding.Editor {
 
     public void CopyManifest(ModDefinition modDefinition, DirectoryInfo modDirectory) {
       var manifestPath = Path.Combine(modDefinition.AbsolutePath, ManifestFileName);
-      File.Copy(manifestPath, Path.Combine(modDirectory.FullName, ManifestFileName));
+      File.Copy(manifestPath, Path.Combine(modDirectory.FullName, ManifestFileName), true);
     }
 
     public void CopyDataFiles(ModDefinition modDefinition, DirectoryInfo modDirectory) {
@@ -37,7 +37,7 @@ namespace ModBuilding.Editor {
                    .Where(file => file.Extension != ".meta")) {
         var relativeFilePath = Path.GetRelativePath(dataFilesDirectory.FullName,
                                                     dataFile.FullName);
-        dataFile.CopyTo(Path.Combine(modDirectory.FullName, relativeFilePath));
+        dataFile.CopyTo(Path.Combine(modDirectory.FullName, relativeFilePath), true);
       }
     }
 

@@ -11,17 +11,19 @@ namespace ModBuilding.Editor {
     private static readonly string MacAssetBundleSuffix = "_mac";
     private static readonly string[] InvalidAssetBundleExtensions = { ".unity", ".cs", ".meta" };
 
-    public void Build(ModDefinition modDefinition, DirectoryInfo modDirectory) {
+    public void Build(ModDefinition modDefinition, DirectoryInfo modDirectory,
+                      ModBuilderSettings modBuilderSettings) {
       var assetBundlesDirectoryPath = Path.Combine(modDefinition.AbsolutePath,
                                                    AssetBundlesDirectory);
       var assetBundlesDirectory = new DirectoryInfo(assetBundlesDirectoryPath);
       if (assetBundlesDirectory.Exists) {
-        BuildInternal(modDefinition, modDirectory, assetBundlesDirectory);
+        BuildInternal(modDefinition, modDirectory, assetBundlesDirectory, modBuilderSettings);
       }
     }
 
     private static void BuildInternal(ModDefinition modDefinition, DirectoryInfo modDirectory,
-                                      DirectoryInfo assetBundlesDirectory) {
+                                      DirectoryInfo assetBundlesDirectory,
+                                      ModBuilderSettings modBuilderSettings) {
       var projectPath = Path.GetDirectoryName(Application.dataPath);
       var assetsToBundle = Directory
           .EnumerateFiles(assetBundlesDirectory.FullName, "*", SearchOption.AllDirectories)
@@ -31,8 +33,12 @@ namespace ModBuilding.Editor {
 
       var destinationPath = Path.Combine(modDirectory.FullName, AssetBundlesDirectory);
       Directory.CreateDirectory(destinationPath);
-      BuildWinAssetBundle(modDefinition, assetsToBundle, destinationPath);
-      BuildMacAssetBundle(modDefinition, assetsToBundle, destinationPath);
+      if(modBuilderSettings.BuildWindowsAssetBundle) {
+        BuildWinAssetBundle(modDefinition, assetsToBundle, destinationPath);
+      }
+      if(modBuilderSettings.BuildMacAssetBundle) {
+        BuildMacAssetBundle(modDefinition, assetsToBundle, destinationPath);
+      }
       File.Delete(Path.Combine(destinationPath, AssetBundlesDirectory));
       File.Delete(Path.Combine(destinationPath, AssetBundlesDirectory + ".manifest"));
     }
