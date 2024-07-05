@@ -30,7 +30,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.28",
+      "version": "3.0.31",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -89,7 +89,7 @@
         "com.unity.modules.physics": "1.0.0",
         "com.unity.modules.terrain": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0",
-        "com.unity.rendering.light-transport": "1.0.0"
+        "com.unity.rendering.light-transport": "1.0.1"
       }
     },
     "com.unity.render-pipelines.universal": {
@@ -180,7 +180,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.8.6",
+      "version": "1.8.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {
