@@ -32,13 +32,15 @@ namespace ModBuilding.Editor {
       _modBuilderSettings = modBuilderSettings;
     }
 
-    public void Build() {
+    public bool Build() {
       var buildPath = Path.Combine(UserDataFolder, BuildDirectory, BuildName);
       if (!_modBuilderSettings.BuildCode || TryBuildProject(buildPath)) {
         foreach (var modDefinition in _modDefinitions) {
           BuildMod(modDefinition, buildPath);
         }
+        return true;
       }
+      return false;
     }
 
     private static bool TryBuildProject(string buildPath) {
