@@ -47,8 +47,7 @@ namespace ModBuilding.Editor {
       var buildOptions = new BuildPlayerOptions {
           target = BuildTarget.StandaloneWindows64,
           locationPathName = buildPath,
-          scenes = EditorBuildSettings.scenes.Select(scene => scene.path).ToArray(),
-          options = BuildOptions.BuildScriptsOnly
+          scenes = EditorBuildSettings.scenes.Select(scene => scene.path).ToArray()
       };
       return BuildPipeline.BuildPlayer(buildOptions).summary.result == BuildResult.Succeeded;
     }
