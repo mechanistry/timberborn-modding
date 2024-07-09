@@ -26,9 +26,11 @@
         <ui:VisualElement name="AutostartWrapper" class="mod-builder-window__autostart-wrapper">
             <ui:Toggle name="AutostartToggle" text="Run the game after successful build" />
             <ui:VisualElement name="AutostartValues">
+                <ui:Toggle name="RunOnSteamToggle" text="Run on Steam" />
                 <ui:TextField name="GamePath" label="Game executable path:" class="mod-builder-window__label" />
                 <ui:TextField name="SettlementName" label="Settlement (optional):" class="mod-builder-window__label" />
                 <ui:TextField name="SaveName" label="Save (optional):" class="mod-builder-window__label" />
+                <ui:TextField name="CustomArguments" label="Custom arguments:" class="mod-builder-window__label" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

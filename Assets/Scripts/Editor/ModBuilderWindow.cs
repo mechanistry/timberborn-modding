@@ -111,6 +111,7 @@ namespace ModBuilding.Editor {
     private void RunBuild(ModBuilderSettings modBuilderSettings) {
       var result = new ModBuilder(GetMods(true), modBuilderSettings).Build();
       if (result) {
+        Debug.Log("Build completed successfully");
         _gameAutostarter.StartGameIfEnabled();
       }
     }
