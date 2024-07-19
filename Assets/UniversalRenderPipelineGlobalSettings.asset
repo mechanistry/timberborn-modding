@@ -55,7 +55,18 @@ MonoBehaviour:
       - rid: 6675213306823704595
       - rid: 6675213306823704596
     m_RuntimeSettings:
-      m_List: []
+      m_List:
+      - rid: 6675213306823704576
+      - rid: 6675213306823704577
+      - rid: 6675213306823704578
+      - rid: 6675213306823704580
+      - rid: 6675213306823704581
+      - rid: 6675213306823704584
+      - rid: 6675213306823704586
+      - rid: 6675213306823704588
+      - rid: 6675213306823704594
+      - rid: 6675213306823704595
+      - rid: 6675213306823704596
   m_AssetVersion: 8
   m_ObsoleteDefaultVolumeProfile: {fileID: 0}
   m_RenderingLayerNames:
@@ -92,6 +103,8 @@ MonoBehaviour:
           type: 3}
         m_xrMirrorViewPS: {fileID: 4800000, guid: d5a307c014552314b9f560906d708772,
           type: 3}
+        m_xrMotionVector: {fileID: 4800000, guid: f89aac1e4f84468418fe30e611dff395,
+          type: 3}
     - rid: 6675213306823704578
       type: {class: UniversalRendererResources, ns: UnityEngine.Rendering.Universal,
         asm: Unity.RenderPipelines.Universal.Runtime}
@@ -121,6 +134,7 @@ MonoBehaviour:
           type: 3}
         m_FallOffLookup: {fileID: 2800000, guid: 5688ab254e4c0634f8d6c8e0792331ca,
           type: 3}
+        m_CopyDepthPS: {fileID: 4800000, guid: d6dae50ee9e1bfa4db75f19f99355220, type: 3}
         m_DefaultCustomMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3,
           type: 2}
         m_DefaultLitMaterial: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3,
