@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style path="UI/Views/Editor/TimbermeshEditorTools/TimbermeshEditorToolsStyle" />
+    <ui:VisualElement name="ModelName" class="model-name">
+        <ui:Label text="Model file:" class="model-name__label" />
+        <uie:PropertyField name="ModelName" label="" binding-path="_modelName" class="model-name__text-field" />
+    </ui:VisualElement>
+    <ui:VisualElement name="Debug box" class="debug-box">
+        <ui:Button name="FindTimbermeshFile" text="Find model in prefab directory" class="debug-box__button" />
+        <ui:Button name="CreatePreview" text="Create model preview" class="debug-box__button" />
+    </ui:VisualElement>
+</ui:UXML>

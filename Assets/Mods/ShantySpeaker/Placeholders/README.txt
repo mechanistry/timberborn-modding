@@ -1,0 +1,1 @@
+﻿These are placeholder materials used by Timbermesh to properly render models in this editor. In game, Timbermesh will use proper built-in materials - it searches for them by their names.
