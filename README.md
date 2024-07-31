@@ -25,12 +25,16 @@ The best place to discuss the experimental build, as well as modding in general,
 7. Wait for the import to complete and the project to open.
 8. In the toolbar click "Timberborn" > "Show Mod Builder". There you can choose whether you want to build all or selected mods found in the project.
    - The mod builder places the resulting files in `Documents/Timberborn/Mods`, including your code and asset bundles.
-   - It always deletes the current content of the mod being built.
    - You need to have Mac Build Support module installed, as the builder creates AssetBundles for both Windows and MacOS versions of the game.
 
 If you start Timberborn, you should now see your mod in the mod manager.
 
 Keep in mind that many mods do not require Unity. For example, modifying existing specifications or adding new translations can be done without Unity. Keep reading to find out more.
+
+## Installing modding tools only (advanced)
+Instead of cloning this repository and using it as a base for your mods as described above, you can install the modding tools only. To do so, open the Package Manager in your Unity project and add the following package using the "Add package from git URL" option: https://github.com/mechanistry/timberborn-modding.git?path=/Assets/Tools
+
+Remember to update the package to the latest version from time to time. If you want, you can switch to a certain branch or commit using advanced options described in the Unity documentation: https://docs.unity3d.com/Manual/upm-git.html#revision
 
 ## Mod manager
 Timberborn includes a basic built-in mod manager. The mod manager is shown every time the game starts if it detects any mods in `Documents/Timberborn/Mods` or mods downloaded by Steam Workshop. You can also open it manually from the main menu.
@@ -86,9 +90,16 @@ Each mod has a `manifest.json` file in its root folder which looks as follows.
       "Id": "AnotherMod",
       "MinimumVersion": "0.1"
     }
+  ],
+  "OptionalMods": [
+    {
+      "Id": "YetAnotherMod"
+    }
   ]
 }
 ```
+
+RequiredMods and OptionalMods are dependecies for your mod, meaning the game will load them before your mod. The difference between them is that RequiredMods will trigger a warning icon in the mod manager if they are missing, while OptionalMods will not.
 
 ## Specifications
 You can modify and extend many aspects of the game without using code, Unity, or other mods by simply placing a `.json` file in the correct folder. We call those files Specifications.
@@ -202,13 +213,15 @@ All DLLs located in the mod’s folder and its subfolders are loaded when launch
 
 The game then searches for all implementations of the `IModStarter` interface, creates instances of these implementations and runs the `StartMod` method on them. This interface lets you run your own code when the game first starts, for example apply code modifications using Cecil, Harmony or similar without having to use BepInEx or modifying the game’s Program Files directory in any other way.
 
-The class which implements IModStarter must have a parameterless constructor.
+The class which implements `IModStarter` must have a parameterless constructor.
+
+You can use the `IModEnvironment` parameter to access the mod's directory on the disk.
 
 Example:
 ```
 public class MyFirstModStarter : IModStarter {
 
-  public void StartMod() {
+  public void StartMod(IModEnvironment modEnvironment) {
     // Your code goes here
   }
 
