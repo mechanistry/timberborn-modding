@@ -32,7 +32,7 @@ If you start Timberborn, you should now see your mod in the mod manager.
 Keep in mind that many mods do not require Unity. For example, modifying existing specifications or adding new translations can be done without Unity. Keep reading to find out more.
 
 ## Installing modding tools only (advanced)
-Instead of cloning this repository and using it as a base for your mods as described above, you can install the modding tools only. To do so, open the Package Manager in your Unity project and add the following package using the "Add package from git URL" option: https://github.com/mechanistry/timberborn-modding.git?path=/Assets/Tools
+Instead of cloning this repository and using it as a base for your mods as described above, you can install the modding tools only. To do so, open the Package Manager in your Unity project and add the following package using the "Add package from git URL" option: `https://github.com/mechanistry/timberborn-modding.git?path=/Assets/Tools`
 
 Remember to update the package to the latest version from time to time. If you want, you can switch to a certain branch or commit using advanced options described in the Unity documentation: https://docs.unity3d.com/Manual/upm-git.html#revision
 
