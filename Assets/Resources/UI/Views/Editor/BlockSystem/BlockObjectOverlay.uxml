@@ -1,8 +1,0 @@
-﻿<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
-    <Style src="/Assets/Resources/UI/Views/Editor/BlockSystem/BlockSystemStyle.uss" />
-    <ui:VisualElement name="BlockObjectOverlay">
-        <ui:Label name="LayerRangeLabel" />
-        <ui:MinMaxSlider name="LayerRangeSlider" />
-        <ui:Toggle name="HideUnoccupiedToggle" text="Hide unoccupied" />
-    </ui:VisualElement>
-</ui:UXML>

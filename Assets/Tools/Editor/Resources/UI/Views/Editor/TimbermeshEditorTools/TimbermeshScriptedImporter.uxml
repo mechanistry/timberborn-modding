@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
+    <Style path="UI/Views/Editor/TimbermeshEditorTools/TimbermeshEditorToolsStyle" />
+    <ui:Label name="Name" text="Timbermesh model" />
+    <ui:Label name="Version" text="Version: 000" />
+    <ui:Foldout name="Hierarchy" text="Hierarchy" class="inspector__foldout" />
+    <ui:Foldout name="VertexAnimations" text="Vertex animations" value="false" class="inspector__foldout" />
+    <ui:Foldout name="NodeAnimations" text="Node animations" value="false" class="inspector__foldout" />
+</ui:UXML>

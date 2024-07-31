@@ -1,7 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
-    <Style src="/Assets/Resources/UI/Views/Editor/TimbermeshAnimations/TimbermeshAnimationsStyle.uss" />
-    <ui:VisualElement name="AnimatorStateCondition" class="animator-state-condition">
-        <ui:DropdownField name="ParameterName" binding-path="_parameterName" class="animator-state-condition__dropdown" />
-        <ui:Toggle name="MustBeTrue" binding-path="_mustBeTrue" class="animator-state-condition__toggle" />
-    </ui:VisualElement>
-</ui:UXML>

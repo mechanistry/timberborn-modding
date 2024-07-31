@@ -5,9 +5,10 @@
   "MinimumGameVersion": "0.0.0.0",
   "Description": "Example mod that overwrites some game content",
   "RequiredMods": [
+  ],
+  "OptionalMods": [
     {
-      "Id": "Timberborn.ModExamples.ShantySpeaker",
-      "MinimumVersion": "0.1"
+      "Id": "Timberborn.ModExamples.ShantySpeaker"
     }
   ]
 }
