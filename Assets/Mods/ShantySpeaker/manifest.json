@@ -1,8 +1,8 @@
 {
   "Name": "Shanty Speaker",
-  "Version": "0.6.1.1",
+  "Version": "0.6.5.0",
   "Id": "Timberborn.ModExamples.ShantySpeaker",
-  "MinimumGameVersion": "0.6.1.0",
+  "MinimumGameVersion": "0.6.5.0",
   "Description": "This mod adds a new Iron Teeth building that plays \"Shores of Beaver Bay\" - the shanty song arranged by Zofia Domaradzka and recorded by Timberborn's players and developers in 2022.\nIf you're a modder, check out this mod for a showcase of Timberborn's custom 3D model format, Timbermesh.\n\nSource code and other examples: https://github.com/mechanistry/timberborn-modding",
   "RequiredMods": [
   ]
