@@ -176,7 +176,6 @@ MonoBehaviour:
   _scienceCost: 300
   _placeFinished: 0
   _finishableWithBeaversOnSite: 0
-  _path: 0
   _drawRangeBoundsOnIt: 0
 --- !u!114 &5124144526841976077
 MonoBehaviour:
@@ -187,12 +186,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -460516431, guid: 1bd6ccb667024f9c2b77daf7f62a4eed, type: 3}
+  m_Script: {fileID: 1596376676, guid: 1bd6ccb667024f9c2b77daf7f62a4eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _finishedModel: {fileID: 2207535408146693131}
-  _unfinishedModel: {fileID: 7085017668101473028}
-  _finishedUncoveredModel: {fileID: 0}
+  _finishedModelName: '#Finished'
+  _unfinishedModelName: '#Unfinished'
+  _finishedUncoveredModelName: 
+  _constructionModeModel: 0
 --- !u!114 &6550179831291003621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,13 +271,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1115175677, guid: b5f268a4cb31a93ed707a95d3a502b0e, type: 3}
+  m_Script: {fileID: 652365310, guid: b6b9d4cc3090b6fceb2eb6438dd271f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _displayNameLocKey: Building.ShantySpeaker.DisplayName
   _descriptionLocKey: Building.ShantySpeaker.Description
   _flavorDescriptionLocKey: 
-  _image: {fileID: 21300000, guid: ac448bd0efe80a243b80a08d966f195e, type: 3}
+  _imagePath: Buildings/Decorations/ShantySpeaker/ShantySpeakerIcon
 --- !u!114 &680810310456130949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1933139831, guid: 75be7af0b34ada5bff62a949a3c4181d, type: 3}
+  m_Script: {fileID: 459098212, guid: 75be7af0b34ada5bff62a949a3c4181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _effectSpecifications:
