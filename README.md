@@ -251,3 +251,14 @@ Similarly, PrefabConfugurators are automatically installed if they are placed in
 You will likely want to use Harmony or Mono.Cecil to inject your code into the game.
 
 Using BepInEx for developing your mod is OK but requiring players to install it is discouraged. Mods relying on BepInEx are one of the most common causes of Timberborn crashes and they are notorious for being difficult to remove, they cannot be easily switched off, and they survive a full reinstallation of the game.
+
+## Logs and console
+You can find game logs in this folder on Windows:
+```
+C:\Users\[user]\AppData\LocalLow\Mechanistry\Timberborn
+```
+On macOS:
+```
+~/Library/Logs/Mechanistry/Timberborn
+```
+You can also view logs using the in-game console which by default can be accessed with Alt+\`.
