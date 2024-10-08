@@ -1,6 +1,6 @@
 {
   "name": "com.mechanistry.timberborn-modding",
-  "version": "0.6.3",
+  "version": "0.6.8",
   "displayName": "Timberborn Modding Tools",
   "description": "Provides scripts and resources that help create mods for Timberborn.",
   "author": {
@@ -11,8 +11,8 @@
   "licensesUrl": "https://raw.githubusercontent.com/mechanistry/timberborn-modding/main/LICENSE",
   "documentationUrl": "https://github.com/mechanistry/timberborn-modding",
   "dependencies": {
-    "com.unity.inputsystem": "1.8.2",
+    "com.unity.inputsystem": "1.9.0",
     "com.unity.render-pipelines.universal": "17.0.3",
-    "com.unity.services.analytics": "5.1.1"
+    "com.unity.services.analytics": "6.0.1"
   }
 }
