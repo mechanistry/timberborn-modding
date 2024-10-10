@@ -1,9 +1,5 @@
 # Timberborn modding tools and examples
 
-## Important: version compatibility note
-
-This project requires Timberborn in version <b>0.6.0.0</b> or higher, also known as <b>Update 6</b>. This means that for the time being it is only compatible with the experimental version of the game.
-
 ## Overview
 This project's intent is to make you familiar with the Timberborn modding pipeline. It contains three example mods that showcase basic modding possibilities - adding new buildings, adding your own scripts and overwriting existing game elements. There are also the tools for automatic Timberborn DLLs import and building the mods.
 
