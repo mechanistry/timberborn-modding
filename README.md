@@ -5,7 +5,7 @@ This project's intent is to make you familiar with the Timberborn modding pipeli
 
 The repository also contains Timbermesh editor libraries, which allow you to use our [custom mesh format](https://github.com/mechanistry/timbermesh).
 
-You can learn more about modding Timberborn from this article, as well as from the [community wiki](https://timberborn.wiki.gg/wiki/Creating_Mods_(Update_6)).
+You can learn more about modding Timberborn from this article, as well as from the [community wiki](https://timberborn.wiki.gg/wiki/Creating_Mods).
 
 The best place to discuss the experimental build, as well as modding in general, is Timberborn's official Discord server: [https://discord.gg/timberborn](https://discord.gg/timberborn).
 
