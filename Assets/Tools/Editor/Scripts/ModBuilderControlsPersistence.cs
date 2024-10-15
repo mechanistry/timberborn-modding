@@ -11,7 +11,8 @@ namespace Timberborn.ModdingTools {
     private readonly TimberbornPathPersistence _timberbornPathPersistence = new();
 
     public void InitializeBuildControls(Toggle buildCode, Toggle buildWindowsAssetBundle,
-                                        Toggle buildMacAssetBundle) {
+                                        Toggle buildMacAssetBundle,
+                                        TextField compatibilityVersion) {
       buildCode.value = EditorPrefs.GetBool(GetKey(buildCode.name), true);
       buildCode.RegisterValueChangedCallback(
           evt => EditorPrefs.SetBool(GetKey(buildCode.name), evt.newValue));
@@ -22,6 +23,10 @@ namespace Timberborn.ModdingTools {
       buildMacAssetBundle.value = EditorPrefs.GetBool(GetKey(buildMacAssetBundle.name), true);
       buildMacAssetBundle.RegisterValueChangedCallback(
           evt => EditorPrefs.SetBool(GetKey(buildMacAssetBundle.name), evt.newValue));
+      compatibilityVersion.value = EditorPrefs.GetString(GetKey(compatibilityVersion.name),
+                                                         string.Empty);
+      compatibilityVersion.RegisterValueChangedCallback(
+          evt => EditorPrefs.SetString(GetKey(compatibilityVersion.name), evt.newValue));
     }
 
     public void InitializeAutostartControls(Toggle autostartToggle, Toggle runOnSteamToggle,

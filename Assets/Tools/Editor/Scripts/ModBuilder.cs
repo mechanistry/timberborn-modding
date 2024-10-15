@@ -20,6 +20,7 @@ namespace Timberborn.ModdingTools {
                            "Timberborn")
             : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                            "Timberborn");
+    private static readonly string CompatibilityVersionPrefix = "version-";
     private readonly List<ModDefinition> _modDefinitions;
     private readonly ModBuilderSettings _modBuilderSettings;
     private readonly AssetBundleBuilder _assetBundleBuilder = new();
@@ -53,9 +54,9 @@ namespace Timberborn.ModdingTools {
     }
 
     private void BuildMod(ModDefinition modDefinition, string buildPath) {
-      var modDirectory = CreateModDirectory(modDefinition);
+      var modDirectory = CreateModDirectory(modDefinition, out var rootDirectory);
       _assetsCopier.CopyManifest(modDefinition, modDirectory);
-      _assetsCopier.CopyDataFiles(modDefinition, modDirectory);
+      _assetsCopier.CopyFiles(modDefinition, modDirectory, rootDirectory);
       if (_modBuilderSettings.BuildCode) {
         _dllFilesCopier.CopyBuiltDllFiles(modDefinition, modDirectory, buildPath);
       }
@@ -64,9 +65,15 @@ namespace Timberborn.ModdingTools {
       }
     }
 
-    private DirectoryInfo CreateModDirectory(ModDefinition modDefinition) {
+    private DirectoryInfo CreateModDirectory(ModDefinition modDefinition, 
+                                             out DirectoryInfo rootDirectory) {
       var modsDirectory = Path.Combine(UserDataFolder, GameModsDirectory);
-      var directoryPath = Path.Combine(modsDirectory, modDefinition.Name);
+      var rootDirectoryPath = Path.Combine(modsDirectory, modDefinition.Name);
+      rootDirectory = Directory.CreateDirectory(rootDirectoryPath);
+      var directoryPath = string.IsNullOrEmpty(_modBuilderSettings.CompatibilityVersion) ?
+          rootDirectoryPath :
+          Path.Combine(rootDirectoryPath,
+                       CompatibilityVersionPrefix + _modBuilderSettings.CompatibilityVersion);
       if (_modBuilderSettings.DeleteFiles && Directory.Exists(directoryPath)) {
         var workshopFilePath = Path.Combine(directoryPath, WorkshopDataFile);
         var workshopData = File.Exists(workshopFilePath)

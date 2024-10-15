@@ -11,6 +11,7 @@
             <ui:ScrollView name="ModList" />
             <ui:Label name="NoModsLabel" text="No mods found" class="mod-builder-window__no-mods-label" />
         </ui:VisualElement>
+        <ui:TextField name="CompatibilityVersion" label="Compatibility version:" class="mod-builder-window__compatibility-version" />
         <ui:TabView name="BuildTabView" class="mod-builder-window__controls-margin mod-builder-window__controls-wrapper">
             <ui:Tab name="DevBuildTab" label="Dev build" class="mod-builder-window__tab">
                 <ui:Toggle name="CodeToggle" text="Build code" />

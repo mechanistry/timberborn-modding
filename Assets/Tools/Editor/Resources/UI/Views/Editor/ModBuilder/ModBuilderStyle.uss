@@ -50,3 +50,8 @@
 .mod-builder-window__autostart-wrapper {
     margin: 15px;
 }
+
+.mod-builder-window__compatibility-version {
+    margin: 5px;
+    width: 200px;
+}

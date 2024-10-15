@@ -16,6 +16,7 @@ namespace Timberborn.ModdingTools {
     private Toggle _buildCode;
     private Toggle _buildWindowsAssetBundle;
     private Toggle _buildMacAssetBundle;
+    private TextField _compatibilityVersion;
 
     [MenuItem("Timberborn/Show Mod Builder", false, 0)]
     public static void ShowWindow() {
@@ -36,6 +37,7 @@ namespace Timberborn.ModdingTools {
       _modList = rootVisualElement.Q<ScrollView>("ModList");
       _noModsLabel = rootVisualElement.Q<Label>("NoModsLabel");
 
+      _compatibilityVersion = rootVisualElement.Q<TextField>("CompatibilityVersion");
       _buildCode = rootVisualElement.Q<Toggle>("CodeToggle");
       _buildWindowsAssetBundle = rootVisualElement.Q<Toggle>("WindowsAssetBundleToggle");
       _buildMacAssetBundle = rootVisualElement.Q<Toggle>("MacAssetBundleToggle");
@@ -44,8 +46,8 @@ namespace Timberborn.ModdingTools {
       rootVisualElement.Q<Button>("CleanBuildButton")
           .RegisterCallback<ClickEvent>(_ => RunCleanBuild());
 
-      _modBuilderControlsPersistence.InitializeBuildControls(_buildCode, _buildWindowsAssetBundle,
-                                                             _buildMacAssetBundle);
+      _modBuilderControlsPersistence.InitializeBuildControls(
+          _buildCode, _buildWindowsAssetBundle, _buildMacAssetBundle, _compatibilityVersion);
       _gameAutostarter.Initialize(rootVisualElement);
       RefreshMods();
     }
@@ -98,12 +100,14 @@ namespace Timberborn.ModdingTools {
       var modBuilderSettings = new ModBuilderSettings(_buildCode.value,
                                                       _buildWindowsAssetBundle.value,
                                                       _buildMacAssetBundle.value,
-                                                      false);
+                                                      false,
+                                                      _compatibilityVersion.text);
       RunBuild(modBuilderSettings);
     }
 
     private void RunCleanBuild() {
-      var modBuilderSettings = new ModBuilderSettings(true, true, true, true);
+      var modBuilderSettings = new ModBuilderSettings(true, true, true, true,
+                                                      _compatibilityVersion.text);
       RunBuild(modBuilderSettings);
     }
 
