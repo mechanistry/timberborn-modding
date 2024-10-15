@@ -71,6 +71,29 @@ Documents/
             └── manifest.json
 ```
 
+## Compatibility versions
+If you want your mod to be compatible with multiple versions of the game, such as Stable and Experimental, you can place a specific version of your mod in a subfolder correspoding to the version of the game it is compatible with. That subfolder has to be named as `version-x` where `x` stands for the game version. You can use any number of digits, so both `version-0.6` and `version-0.6.8.4` will work. The game will load the mod from the subfolder that is closest to the current version of the game and not higher than it.
+
+Example:
+```
+Documents/
+└── Timberborn/
+    └── Mods/
+        └── MyFirstMod/
+            ├── version-0.6/
+            │   ├── AssetBundles/
+            │   │  └── ModAssets.assets
+            │   ├── Code.dll
+            │   └── manifest.json
+            └── version-0.7/
+                ├── AssetBundles/
+                │  └── ModAssets.assets
+                ├── Code.dll
+                └── manifest.json
+```
+
+Note that if any `version-x` folder is found, then rest of the content in the root folder will be ignored.
+
 ## Manifest
 Each mod has a `manifest.json` file in its root folder which looks as follows.
 
