@@ -11,7 +11,7 @@ namespace Timberborn.ModdingTools {
     private readonly TimberbornPathPersistence _timberbornPathPersistence = new();
 
     public void InitializeBuildControls(Toggle buildCode, Toggle buildWindowsAssetBundle,
-                                        Toggle buildMacAssetBundle,
+                                        Toggle buildMacAssetBundle, Toggle buildZipArchive,
                                         TextField compatibilityVersion) {
       buildCode.value = EditorPrefs.GetBool(GetKey(buildCode.name), true);
       buildCode.RegisterValueChangedCallback(
@@ -23,6 +23,9 @@ namespace Timberborn.ModdingTools {
       buildMacAssetBundle.value = EditorPrefs.GetBool(GetKey(buildMacAssetBundle.name), true);
       buildMacAssetBundle.RegisterValueChangedCallback(
           evt => EditorPrefs.SetBool(GetKey(buildMacAssetBundle.name), evt.newValue));
+      buildZipArchive.value = EditorPrefs.GetBool(GetKey(buildZipArchive.name), false);
+      buildZipArchive.RegisterValueChangedCallback(
+          evt => EditorPrefs.SetBool(GetKey(buildZipArchive.name), evt.newValue));
       compatibilityVersion.value = EditorPrefs.GetString(GetKey(compatibilityVersion.name),
                                                          string.Empty);
       compatibilityVersion.RegisterValueChangedCallback(

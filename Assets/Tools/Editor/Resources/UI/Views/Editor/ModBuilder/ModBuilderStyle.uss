@@ -35,7 +35,7 @@
 
 .mod-builder-window__warning-label {
     color: red;
-    padding: 2px 8px;
+    padding: 2px 4px;
     white-space: normal;
 }
 

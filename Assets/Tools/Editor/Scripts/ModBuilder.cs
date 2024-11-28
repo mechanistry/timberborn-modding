@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
 
 namespace Timberborn.ModdingTools {
   internal class ModBuilder {
@@ -54,16 +53,19 @@ namespace Timberborn.ModdingTools {
       if (_modBuilderSettings.BuildWindowsAssetBundle || _modBuilderSettings.BuildMacAssetBundle) {
         _assetBundleBuilder.Build(modDefinition, modDirectory, _modBuilderSettings);
       }
+      if (_modBuilderSettings.BuildZipArchive) {
+        BuildZipArchive(modDefinition, rootDirectory);
+      }
     }
 
-    private DirectoryInfo CreateModDirectory(ModDefinition modDefinition, 
+    private DirectoryInfo CreateModDirectory(ModDefinition modDefinition,
                                              out DirectoryInfo rootDirectory) {
       var rootDirectoryPath = Path.Combine(ModDirectories.ModsDirectory, modDefinition.Name);
       rootDirectory = Directory.CreateDirectory(rootDirectoryPath);
-      var directoryPath = string.IsNullOrEmpty(_modBuilderSettings.CompatibilityVersion) ?
-          rootDirectoryPath :
-          Path.Combine(rootDirectoryPath,
-                       CompatibilityVersionPrefix + _modBuilderSettings.CompatibilityVersion);
+      var directoryPath = string.IsNullOrEmpty(_modBuilderSettings.CompatibilityVersion)
+          ? rootDirectoryPath
+          : Path.Combine(rootDirectoryPath,
+                         CompatibilityVersionPrefix + _modBuilderSettings.CompatibilityVersion);
       if (_modBuilderSettings.DeleteFiles && Directory.Exists(directoryPath)) {
         var workshopFilePath = Path.Combine(directoryPath, WorkshopDataFile);
         var workshopData = File.Exists(workshopFilePath)
@@ -77,6 +79,12 @@ namespace Timberborn.ModdingTools {
         return modDirectory;
       }
       return Directory.CreateDirectory(directoryPath);
+    }
+
+    private static void BuildZipArchive(ModDefinition modDefinition, DirectoryInfo rootDirectory) {
+      var zipFilePath = Path.Combine(ModDirectories.ModsDirectory, modDefinition.Name + ".zip");
+      File.Delete(zipFilePath);
+      ZipFile.CreateFromDirectory(rootDirectory.FullName, zipFilePath);
     }
 
   }

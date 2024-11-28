@@ -17,6 +17,7 @@ namespace Timberborn.ModdingTools {
     private Toggle _buildCode;
     private Toggle _buildWindowsAssetBundle;
     private Toggle _buildMacAssetBundle;
+    private Toggle _buildZipArchive;
     private TextField _compatibilityVersion;
 
     [MenuItem("Timberborn/Show Mod Builder", false, 0)]
@@ -42,13 +43,19 @@ namespace Timberborn.ModdingTools {
       _buildCode = rootVisualElement.Q<Toggle>("CodeToggle");
       _buildWindowsAssetBundle = rootVisualElement.Q<Toggle>("WindowsAssetBundleToggle");
       _buildMacAssetBundle = rootVisualElement.Q<Toggle>("MacAssetBundleToggle");
+      _buildZipArchive = rootVisualElement.Q<Toggle>("ZipArchiveToggle");
+      var zipWarningLabel = rootVisualElement.Q<Label>("ZipWarningLabel");
+      _buildZipArchive.RegisterValueChangedCallback(
+          evt => ToggleDisplayStyle(zipWarningLabel, evt.newValue));
+      ToggleDisplayStyle(zipWarningLabel, _buildZipArchive.value);
       rootVisualElement.Q<Button>("DevBuildButton")
           .RegisterCallback<ClickEvent>(_ => RunDevBuild());
       rootVisualElement.Q<Button>("CleanBuildButton")
           .RegisterCallback<ClickEvent>(_ => RunCleanBuild());
 
       _modBuilderControlsPersistence.InitializeBuildControls(
-          _buildCode, _buildWindowsAssetBundle, _buildMacAssetBundle, _compatibilityVersion);
+          _buildCode, _buildWindowsAssetBundle, _buildMacAssetBundle,
+          _buildZipArchive, _compatibilityVersion);
       _gameAutostarter.Initialize(rootVisualElement);
       _modDirectoryOpener.Initialize(rootVisualElement);
       RefreshMods();
@@ -103,12 +110,14 @@ namespace Timberborn.ModdingTools {
                                                       _buildWindowsAssetBundle.value,
                                                       _buildMacAssetBundle.value,
                                                       false,
+                                                      false,
                                                       _compatibilityVersion.text);
       RunBuild(modBuilderSettings);
     }
 
     private void RunCleanBuild() {
       var modBuilderSettings = new ModBuilderSettings(true, true, true, true,
+                                                      _buildZipArchive.value,
                                                       _compatibilityVersion.text);
       RunBuild(modBuilderSettings);
     }

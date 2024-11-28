@@ -20,7 +20,9 @@
                 <ui:Button name="DevBuildButton" text="Build" class="mod-builder-window__build-button" />
             </ui:Tab>
             <ui:Tab name="CleanBuildTab" label="Clean build" class="mod-builder-window__tab">
-                <ui:Label name="WarningLabel" text="Warning: All data for chosen mods in Documents/Timberborn/Mods will be deleted." class="mod-builder-window__warning-label" />
+                <ui:Toggle name="ZipArchiveToggle" text="Build ZIP archives" />
+                <ui:Label name="ZipWarningLabel" text="Warning: Existing zip archives will be overwritten" class="mod-builder-window__warning-label" />
+                <ui:Label name="WarningLabel" text="Warning: All data for chosen mods and compatibility version in Documents/Timberborn/Mods will be deleted." class="mod-builder-window__warning-label" />
                 <ui:Button name="CleanBuildButton" text="Build" class="mod-builder-window__build-button" />
             </ui:Tab>
         </ui:TabView>
