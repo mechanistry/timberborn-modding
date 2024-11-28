@@ -29,12 +29,15 @@ namespace Timberborn.ModdingTools {
     private static void Import(DirectoryInfo dllDirectory) {
       var pluginsPath = Path.Combine(Application.dataPath, PluginsDirectory);
       RecreatePluginsDirectory(pluginsPath);
+      var dllsCount = 0;
       foreach (var file in dllDirectory.GetFiles()) {
         if (ShouldBeImported(file)) {
           ImportDll(pluginsPath, file);
+          dllsCount++;
         }
       }
       AssetDatabase.Refresh();
+      Debug.Log($"Timberborn DLLs ({dllsCount}) imported successfully.");
     }
 
     private static void RecreatePluginsDirectory(string pluginsPath) {
@@ -44,14 +47,6 @@ namespace Timberborn.ModdingTools {
       Directory.CreateDirectory(pluginsPath);
     }
 
-    private static void ImportDll(string pluginsPath, FileInfo file) {
-      var destination = Path.Combine(pluginsPath, file.Name);
-      File.Copy(file.FullName, destination, true);
-      using var metaFile = File.CreateText(destination + ".meta");
-      metaFile.WriteLine("fileFormatVersion: 2");
-      metaFile.WriteLine("guid: " + GenerateGuid(file.Name));
-    }
-
     private static bool ShouldBeImported(FileInfo fileInfo) {
       foreach (var dllPattern in DllPatterns) {
         if (Regex.IsMatch(fileInfo.Name, dllPattern)) {
@@ -59,6 +54,14 @@ namespace Timberborn.ModdingTools {
         }
       }
       return false;
+    }
+
+    private static void ImportDll(string pluginsPath, FileInfo file) {
+      var destination = Path.Combine(pluginsPath, file.Name);
+      File.Copy(file.FullName, destination, true);
+      using var metaFile = File.CreateText(destination + ".meta");
+      metaFile.WriteLine("fileFormatVersion: 2");
+      metaFile.WriteLine("guid: " + GenerateGuid(file.Name));
     }
 
     private static string GenerateGuid(string fileName) {
