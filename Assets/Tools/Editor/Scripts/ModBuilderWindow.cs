@@ -11,6 +11,7 @@ namespace Timberborn.ModdingTools {
     private static readonly string ModManifest = "manifest.json";
     private readonly ModBuilderControlsPersistence _modBuilderControlsPersistence = new();
     private readonly GameAutostarter _gameAutostarter = new();
+    private readonly ModDirectoryOpener _modDirectoryOpener = new();
     private ScrollView _modList;
     private Label _noModsLabel;
     private Toggle _buildCode;
@@ -49,6 +50,7 @@ namespace Timberborn.ModdingTools {
       _modBuilderControlsPersistence.InitializeBuildControls(
           _buildCode, _buildWindowsAssetBundle, _buildMacAssetBundle, _compatibilityVersion);
       _gameAutostarter.Initialize(rootVisualElement);
+      _modDirectoryOpener.Initialize(rootVisualElement);
       RefreshMods();
     }
 
@@ -116,6 +118,7 @@ namespace Timberborn.ModdingTools {
       if (result) {
         Debug.Log("Build completed successfully");
         _gameAutostarter.StartGameIfEnabled();
+        _modDirectoryOpener.OpenDirectoryIfEnabled();
       }
     }
 

@@ -55,6 +55,13 @@ namespace Timberborn.ModdingTools {
           evt => EditorPrefs.SetString(GetKey(customArguments.name), evt.newValue));
     }
 
+    public void InitializeModsDirectoryControls(Toggle browseModsDirectoryToggle) {
+      browseModsDirectoryToggle.value =
+          EditorPrefs.GetBool(GetKey(browseModsDirectoryToggle.name), false);
+      browseModsDirectoryToggle.RegisterValueChangedCallback(
+          evt => EditorPrefs.SetBool(GetKey(browseModsDirectoryToggle.name), evt.newValue));
+    }
+
     public void SetModEnabled(ModDefinition modDefinition, bool enabled) {
       EditorPrefs.SetBool(GetModEnabledKey(modDefinition), enabled);
     }

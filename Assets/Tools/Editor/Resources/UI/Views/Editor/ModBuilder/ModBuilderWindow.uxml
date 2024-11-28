@@ -24,6 +24,10 @@
                 <ui:Button name="CleanBuildButton" text="Build" class="mod-builder-window__build-button" />
             </ui:Tab>
         </ui:TabView>
+        <ui:VisualElement name="BrowseModsDirectoryWrapper" class="mod-builder-window__browse-mods-directory-wrapper">
+            <ui:Toggle name="BrowseModsDirectoryToggle" text="Open mods directory after successful build" />
+            <ui:Button name="BrowseModsDirectoryButton" text="Browse" />
+        </ui:VisualElement>
         <ui:VisualElement name="AutostartWrapper" class="mod-builder-window__autostart-wrapper">
             <ui:Toggle name="AutostartToggle" text="Run the game after successful build" />
             <ui:VisualElement name="AutostartValues">

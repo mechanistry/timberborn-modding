@@ -48,10 +48,16 @@
 }
 
 .mod-builder-window__autostart-wrapper {
-    margin: 15px;
+    margin-left: 15px;
 }
 
 .mod-builder-window__compatibility-version {
     margin: 5px;
     width: 200px;
+}
+
+.mod-builder-window__browse-mods-directory-wrapper {
+    margin-left: 15px;
+    margin-top: 15px;
+    flex-direction: row;
 }

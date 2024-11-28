@@ -1,0 +1,28 @@
+﻿using UnityEngine;
+using UnityEngine.UIElements;
+
+namespace Timberborn.ModdingTools {
+  internal class ModDirectoryOpener {
+
+    private readonly ModBuilderControlsPersistence _modBuilderControlsPersistence = new();
+    private Toggle _browseModsDirectoryToggle;
+
+    public void Initialize(VisualElement root) {
+      _browseModsDirectoryToggle = root.Q<Toggle>("BrowseModsDirectoryToggle");
+      _modBuilderControlsPersistence.InitializeModsDirectoryControls(_browseModsDirectoryToggle);
+      var button = root.Q<Button>("BrowseModsDirectoryButton");
+      button.RegisterCallback<ClickEvent>(_ => BrowseModsDirectory());
+    }
+    
+    public void OpenDirectoryIfEnabled() {
+      if (_browseModsDirectoryToggle.value) {
+        BrowseModsDirectory();
+      }
+    }
+
+    private static void BrowseModsDirectory() {
+      Application.OpenURL(ModDirectories.ModsDirectory);
+    }
+
+  }
+}

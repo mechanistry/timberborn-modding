@@ -9,17 +9,8 @@ using UnityEngine;
 namespace Timberborn.ModdingTools {
   internal class ModBuilder {
 
-    private static readonly string BuildDirectory = "ModsBuild";
     private static readonly string BuildName = "TimberbornModExamples";
-    private static readonly string GameModsDirectory = "Mods";
     private static readonly string WorkshopDataFile = "workshop_data.json";
-    private static readonly string UserDataFolder =
-        Application.platform == RuntimePlatform.OSXEditor
-            ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                           "Documents",
-                           "Timberborn")
-            : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                           "Timberborn");
     private static readonly string CompatibilityVersionPrefix = "version-";
     private readonly List<ModDefinition> _modDefinitions;
     private readonly ModBuilderSettings _modBuilderSettings;
@@ -34,7 +25,7 @@ namespace Timberborn.ModdingTools {
     }
 
     public bool Build() {
-      var buildPath = Path.Combine(UserDataFolder, BuildDirectory, BuildName);
+      var buildPath = Path.Combine(ModDirectories.BuildDirectory, BuildName);
       if (!_modBuilderSettings.BuildCode || TryBuildProject(buildPath)) {
         foreach (var modDefinition in _modDefinitions) {
           BuildMod(modDefinition, buildPath);
@@ -67,8 +58,7 @@ namespace Timberborn.ModdingTools {
 
     private DirectoryInfo CreateModDirectory(ModDefinition modDefinition, 
                                              out DirectoryInfo rootDirectory) {
-      var modsDirectory = Path.Combine(UserDataFolder, GameModsDirectory);
-      var rootDirectoryPath = Path.Combine(modsDirectory, modDefinition.Name);
+      var rootDirectoryPath = Path.Combine(ModDirectories.ModsDirectory, modDefinition.Name);
       rootDirectory = Directory.CreateDirectory(rootDirectoryPath);
       var directoryPath = string.IsNullOrEmpty(_modBuilderSettings.CompatibilityVersion) ?
           rootDirectoryPath :
