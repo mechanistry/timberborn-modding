@@ -1,4 +1,5 @@
 {
   "name": "Timberborn.ModExamples.HelloWorld",
-  "autoReferenced": false
+  "autoReferenced": false,
+  "allowUnsafeCode": true
 }

@@ -17,6 +17,7 @@ namespace Timberborn.ModdingTools {
         "System.Collections.Immutable.dll", "System.Runtime.CompilerServices.Unsafe.dll",
         "System.Threading.Tasks.Extensions.dll"
     };
+    private static readonly string PublicizeDllPrefix = "Timberborn.";
 
     [MenuItem("Timberborn/Import Timberborn dlls", false, 0)]
     public static void Import() {
@@ -59,6 +60,11 @@ namespace Timberborn.ModdingTools {
     private static void ImportDll(string pluginsPath, FileInfo file) {
       var destination = Path.Combine(pluginsPath, file.Name);
       File.Copy(file.FullName, destination, true);
+
+      if (file.Name.StartsWith(PublicizeDllPrefix)) {
+        DllPublicizer.PublicizeDLL(destination, file.Directory);
+      }
+
       using var metaFile = File.CreateText(destination + ".meta");
       metaFile.WriteLine("fileFormatVersion: 2");
       metaFile.WriteLine("guid: " + GenerateGuid(file.Name));

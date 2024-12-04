@@ -1,4 +1,5 @@
 ﻿{
   "name": "Timberborn.ModExamples.ShantySpeaker",
-  "autoReferenced": false
+  "autoReferenced": false,
+  "allowUnsafeCode": true
 }
