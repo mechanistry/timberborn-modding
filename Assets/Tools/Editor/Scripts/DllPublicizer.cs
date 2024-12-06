@@ -1,9 +1,11 @@
 ﻿using Mono.Cecil;
 using Mono.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Timberborn.ModdingTools {
   internal class DllPublicizer {
@@ -36,6 +38,8 @@ namespace Timberborn.ModdingTools {
     private static void Publicize(Collection<TypeDefinition> types, ModuleDefinition module) {
       var hideInInspectorConstructor = new Lazy<MethodReference>(
           () => module.ImportReference(typeof(HideInInspector).GetConstructor(Type.EmptyTypes)));
+      var objectType = typeof(Object);
+      var objectTypeDefinition = module.ImportReference(objectType).Resolve();
 
       foreach (var type in types) {
         if (type.IsNested) {
@@ -46,14 +50,29 @@ namespace Timberborn.ModdingTools {
         foreach (var method in type.Methods) {
           method.IsPublic = true;
         }
+        var isUnityObject = IsSubclassOf(type, objectTypeDefinition);
         foreach (var field in type.Fields) {
-          if (HideInInspector(field)) {
+          if (isUnityObject && HideInInspector(field)) {
             field.CustomAttributes.Add(new(hideInInspectorConstructor.Value));
           }
           field.IsPublic = true;
         }
 
         Publicize(type.NestedTypes, module);
+      }
+    }
+
+    private static bool IsSubclassOf(TypeDefinition childTypeDefinition,
+                                     TypeDefinition parentTypeDefinition) {
+      return childTypeDefinition.MetadataToken != parentTypeDefinition.MetadataToken
+             && EnumerateBaseClasses(childTypeDefinition)
+                 .Any(b => b.MetadataToken == parentTypeDefinition.MetadataToken);
+    }
+
+    private static IEnumerable<TypeDefinition> EnumerateBaseClasses(TypeDefinition typeDefinition) {
+      while (typeDefinition.BaseType != null) {
+        typeDefinition = typeDefinition.BaseType.Resolve();
+        yield return typeDefinition;
       }
     }
 
