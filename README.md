@@ -264,7 +264,10 @@ public class ConfiguratorTest : IConfigurator {
 }
 ```
 
-Similarly, PrefabConfugurators are automatically installed if they are placed in a prefab with a name ending with `.configurator` and are automatically loaded if they are annotated with the `Context` attribute.
+Similarly, PrefabConfigurators are automatically installed if they are placed in a prefab with a name ending with `.configurator` and are automatically loaded if they are annotated with the `Context` attribute.
+
+## Code: private types and members
+The DLL importer comes with a built-in code publicizer. This means that your mod will have access to the game’s private, protected and internal code. For it to work at runtime, you need to set `allowUnsafeCode` to true in your mod's `.asmdef` files, like shown in the HelloWorld and ShantySpeaker examples.
 
 ## Code: Harmony and Mono.Cecil
 You will likely want to use Harmony or Mono.Cecil to inject your code into the game.
