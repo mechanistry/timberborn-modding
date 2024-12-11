@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace Timberborn.ModdingTools {
@@ -38,27 +39,29 @@ namespace Timberborn.ModdingTools {
     private static void Publicize(Collection<TypeDefinition> types, ModuleDefinition module) {
       var hideInInspectorConstructor = new Lazy<MethodReference>(
           () => module.ImportReference(typeof(HideInInspector).GetConstructor(Type.EmptyTypes)));
-      var objectType = typeof(Object);
-      var objectTypeDefinition = module.ImportReference(objectType).Resolve();
+      var objectTypeDefinition = module.ImportReference(typeof(Object)).Resolve();
+      var visualElementTypeDefinition = module.ImportReference(typeof(VisualElement)).Resolve();
 
       foreach (var type in types) {
-        if (type.IsNested) {
-          type.IsNestedPublic = true;
-        } else {
-          type.IsPublic = true;
-        }
-        foreach (var method in type.Methods) {
-          method.IsPublic = true;
-        }
-        var isUnityObject = IsSubclassOf(type, objectTypeDefinition);
-        foreach (var field in type.Fields) {
-          if (isUnityObject && HideInInspector(field)) {
-            field.CustomAttributes.Add(new(hideInInspectorConstructor.Value));
+        if (!IsSubclassOf(type, visualElementTypeDefinition)) {
+          if (type.IsNested) {
+            type.IsNestedPublic = true;
+          } else {
+            type.IsPublic = true;
           }
-          field.IsPublic = true;
-        }
+          foreach (var method in type.Methods) {
+            method.IsPublic = true;
+          }
+          var isUnityObject = IsSubclassOf(type, objectTypeDefinition);
+          foreach (var field in type.Fields) {
+            if (isUnityObject && HideInInspector(field)) {
+              field.CustomAttributes.Add(new(hideInInspectorConstructor.Value));
+            }
+            field.IsPublic = true;
+          }
 
-        Publicize(type.NestedTypes, module);
+          Publicize(type.NestedTypes, module);
+        }
       }
     }
 
