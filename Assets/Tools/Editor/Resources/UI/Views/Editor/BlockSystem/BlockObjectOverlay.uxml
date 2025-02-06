@@ -1,4 +1,4 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
+﻿<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="True">
     <Style path="UI/Views/Editor/BlockSystem/BlockSystemStyle" />
     <ui:VisualElement name="BlockObjectOverlay">
         <ui:Label name="LayerRangeLabel" />

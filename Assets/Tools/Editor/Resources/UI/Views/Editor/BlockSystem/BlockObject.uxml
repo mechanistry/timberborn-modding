@@ -1,14 +1,25 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+﻿<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <Style path="UI/Views/Editor/BlockSystem/BlockSystemStyle" />
     <ui:VisualElement name="BlockObject">
         <ui:VisualElement name="Blocks">
             <uie:PropertyField name="Size" />
             <ui:VisualElement name="BlocksHeader" class="block-object__blocks-header">
-                <ui:Label class="block-specification__coords-column" />
-                <ui:Label text="Matter below" class="block-specification__column" />
-                <ui:Label text="Occupations" class="block-specification__column" />
-                <ui:Label text="Stackable" class="block-specification__column" />
-                <ui:Label text="Occupy all below" class="block-specification__all-below-column" />
+                <ui:VisualElement class="block-specification__coords-column" />
+                <ui:VisualElement class="block-specification__column">
+                    <ui:Label text="Matter below" />
+                </ui:VisualElement>
+                <ui:VisualElement class="block-specification__column">
+                    <ui:Label text="Occupations" />
+                </ui:VisualElement>
+                <ui:VisualElement class="block-specification__column">
+                    <ui:Label text="Stackable" />
+                </ui:VisualElement>
+                <ui:VisualElement class="block-specification__bool-column">
+                    <ui:Label text="Occupy all below" />
+                </ui:VisualElement>
+                <ui:VisualElement class="block-specification__bool-column">
+                    <ui:Label text="Underground" />
+                </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="BlocksContainer" />
             <ui:VisualElement name="BulkSettings" class="block-object__bulk-settings">
@@ -24,6 +35,7 @@
                     <ui:Button name="SetStackableButton" text="Set visible to:" class="block-object__bulk-setter-button" />
                     <uie:DropdownField name="StackableDropdown" class="block-object__bulk-setter-dropdown" />
                 </ui:VisualElement>
+                <ui:VisualElement class="block-object__bulk-setter" />
             </ui:VisualElement>
         </ui:VisualElement>
         <uie:PropertyField name="Entrance" binding-path="_entrance" />

@@ -1,17 +1,24 @@
-.block-specification {
+﻿.block-specification {
     flex-direction: row;
 }
 
 .block-object__blocks-header {
     flex-direction: row;
+    align-items: flex-end;
+    margin-top: 8px;
 }
 
 .block-specification__coords-column {
     width: 45px;
 }
 
-.block-specification__all-below-column {
-    width: 100px;
+.block-specification__bool-column {
+    width: 12.5%;
+    align-items: center;
+}
+
+.block-specification__bool-column > Label {
+    white-space: normal;
 }
 
 .block-specification__column {
@@ -20,16 +27,20 @@
     flex-shrink: 1;
 }
 
+.block-object__blocks-header > .block-specification__column {
+    margin-left: 8px;
+}
+
 .block-object__bulk-settings {
     flex-direction: row;
-    margin: 8px 85px 8px 45px;
-    flex-grow: 1;
-    flex-shrink: 1;
+    margin: 8px 0 8px 45px;
 }
 
 .block-object__bulk-setter {
     flex-direction: column;
-    width: 33%;
+    width: 25%;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
 .block-object__bulk-setter-button {
