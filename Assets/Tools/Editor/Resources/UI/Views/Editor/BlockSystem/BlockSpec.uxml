@@ -1,0 +1,11 @@
+﻿<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style path="UI/Views/Editor/BlockSystem/BlockSystemStyle" />
+    <ui:VisualElement name="BlockSpec" class="block-spec">
+        <ui:Label name="Coordinates" class="block-spec__coords-column" />
+        <uie:PropertyField name="MatterBelow" label="" class="block-spec__column" />
+        <uie:PropertyField name="Occupations" label="" class="block-spec__column" />
+        <uie:PropertyField name="Stackable" label="" class="block-spec__column" />
+        <uie:PropertyField name="OccupyAllBelow" label="" class="block-spec__bool-column" />
+        <uie:PropertyField name="Underground" label="" class="block-spec__bool-column" />
+    </ui:VisualElement>
+</ui:UXML>

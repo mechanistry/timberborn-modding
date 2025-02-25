@@ -4,20 +4,20 @@
         <ui:VisualElement name="Blocks">
             <uie:PropertyField name="Size" />
             <ui:VisualElement name="BlocksHeader" class="block-object__blocks-header">
-                <ui:VisualElement class="block-specification__coords-column" />
-                <ui:VisualElement class="block-specification__column">
+                <ui:VisualElement class="block-spec__coords-column" />
+                <ui:VisualElement class="block-spec__column">
                     <ui:Label text="Matter below" />
                 </ui:VisualElement>
-                <ui:VisualElement class="block-specification__column">
+                <ui:VisualElement class="block-spec__column">
                     <ui:Label text="Occupations" />
                 </ui:VisualElement>
-                <ui:VisualElement class="block-specification__column">
+                <ui:VisualElement class="block-spec__column">
                     <ui:Label text="Stackable" />
                 </ui:VisualElement>
-                <ui:VisualElement class="block-specification__bool-column">
+                <ui:VisualElement class="block-spec__bool-column">
                     <ui:Label text="Occupy all below" />
                 </ui:VisualElement>
-                <ui:VisualElement class="block-specification__bool-column">
+                <ui:VisualElement class="block-spec__bool-column">
                     <ui:Label text="Underground" />
                 </ui:VisualElement>
             </ui:VisualElement>

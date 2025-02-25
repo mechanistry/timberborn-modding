@@ -1,4 +1,4 @@
-﻿.block-specification {
+﻿.block-spec {
     flex-direction: row;
 }
 
@@ -8,26 +8,26 @@
     margin-top: 8px;
 }
 
-.block-specification__coords-column {
+.block-spec__coords-column {
     width: 45px;
 }
 
-.block-specification__bool-column {
+.block-spec__bool-column {
     width: 12.5%;
     align-items: center;
 }
 
-.block-specification__bool-column > Label {
+.block-spec__bool-column > Label {
     white-space: normal;
 }
 
-.block-specification__column {
+.block-spec__column {
     width: 25%;
     flex-grow: 1;
     flex-shrink: 1;
 }
 
-.block-object__blocks-header > .block-specification__column {
+.block-object__blocks-header > .block-spec__column {
     margin-left: 8px;
 }
 
