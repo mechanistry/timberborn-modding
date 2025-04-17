@@ -120,16 +120,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 803529049518635409}
-  - component: {fileID: 5844259344645007443}
+  - component: {fileID: -3137643244174034652}
   - component: {fileID: 5124144526841976077}
-  - component: {fileID: 6550179831291003621}
   - component: {fileID: 597385797418565326}
-  - component: {fileID: 6141423570053224474}
+  - component: {fileID: -5198036227279724601}
+  - component: {fileID: -7927668705560342925}
   - component: {fileID: 2167036561229256711}
   - component: {fileID: 680810310456130949}
   - component: {fileID: -5247507068609296265}
   - component: {fileID: 758925573250665993}
-  - component: {fileID: -2561802151949959206}
+  - component: {fileID: -3754402086124859344}
   m_Layer: 0
   m_Name: ShantySpeaker.IronTeeth
   m_TagString: Untagged
@@ -154,7 +154,7 @@ Transform:
   - {fileID: 4520380939336599335}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5844259344645007443
+--- !u!114 &-3137643244174034652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,9 +163,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -790041461, guid: 1bd6ccb667024f9c2b77daf7f62a4eed, type: 3}
+  m_Script: {fileID: -579399493, guid: 1bd6ccb667024f9c2b77daf7f62a4eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentCache: {fileID: 0}
   _selectionSoundName: Default
   _loopingSoundName: 
   _buildingCost:
@@ -189,26 +190,13 @@ MonoBehaviour:
   m_Script: {fileID: 1596376676, guid: 1bd6ccb667024f9c2b77daf7f62a4eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentCache: {fileID: 0}
   _finishedModelName: '#Finished'
   _unfinishedModelName: '#Unfinished'
   _finishedUncoveredModelName: 
+  _undergroundModelName: 
   _constructionModeModel: 0
---- !u!114 &6550179831291003621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2863585299073478030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -731835049, guid: b5f268a4cb31a93ed707a95d3a502b0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefabName: ShantySpeaker.IronTeeth
-  _backwardCompatiblePrefabNames: []
-  _requiredFeatureToggle: 
-  _disablingFeatureToggle: 
+  _undergroundModelDepth: 0
 --- !u!114 &597385797418565326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,31 +206,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1800879565, guid: c1ff95bb5ae0e8b420075ec58add6f36, type: 3}
+  m_Script: {fileID: 447443988, guid: c1ff95bb5ae0e8b420075ec58add6f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blocksSpecification:
+  _componentCache: {fileID: 0}
+  _blocksSpec:
     _size: {x: 1, y: 1, z: 2}
-    _blockSpecifications:
+    _blockSpecs:
     - _matterBelow: 1
       _legacyOccupation: 0
       _useNewOccupation: 1
       _occupations: -1
       _stackable: 0
       _occupyAllBelow: 0
+      _underground: 0
     - _matterBelow: 3
       _legacyOccupation: 0
       _useNewOccupation: 1
       _occupations: -1
       _stackable: 0
       _occupyAllBelow: 0
+      _underground: 0
   _entrance:
     _hasEntrance: 0
     _coordinates: {x: 0, y: 0, z: 0}
   _baseZ: 0
   _overridable: 0
   _flippable: 0
---- !u!114 &6141423570053224474
+--- !u!114 &-5198036227279724601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,9 +242,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -871492198, guid: c1ff95bb5ae0e8b420075ec58add6f36, type: 3}
+  m_Script: {fileID: 1566945626, guid: b5f268a4cb31a93ed707a95d3a502b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentCache: {fileID: 0}
+  _prefabName: ShantySpeaker.IronTeeth
+  _backwardCompatiblePrefabNames: []
+  _requiredFeatureToggle: 
+  _disablingFeatureToggle: 
+--- !u!114 &-7927668705560342925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2863585299073478030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1706396145, guid: c1ff95bb5ae0e8b420075ec58add6f36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentCache: {fileID: 0}
   _toolGroupId: Decoration
   _toolOrder: 45
   _toolShape: 0
@@ -261,6 +270,7 @@ MonoBehaviour:
   _customPivot:
     _hasCustomPivot: 0
     _coordinates: {x: 0, y: 0, z: 0}
+  _canBeAttachedToTerrainSide: 0
   _devModeTool: 0
 --- !u!114 &2167036561229256711
 MonoBehaviour:
@@ -274,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 652365310, guid: b6b9d4cc3090b6fceb2eb6438dd271f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentCache: {fileID: 0}
   _displayNameLocKey: Building.ShantySpeaker.DisplayName
   _descriptionLocKey: Building.ShantySpeaker.Description
   _flavorDescriptionLocKey: 
@@ -287,9 +298,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 338473558, guid: 7b595fe4f2a0f156a0cd8601a325161a, type: 3}
+  m_Script: {fileID: -993338964, guid: 7b595fe4f2a0f156a0cd8601a325161a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentCache: {fileID: 0}
 --- !u!114 &-5247507068609296265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,9 +311,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1115272012, guid: 75be7af0b34ada5bff62a949a3c4181d, type: 3}
+  m_Script: {fileID: -1222417671, guid: 75be7af0b34ada5bff62a949a3c4181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentCache: {fileID: 0}
   _effectRadius: 8
 --- !u!114 &758925573250665993
 MonoBehaviour:
@@ -315,11 +328,12 @@ MonoBehaviour:
   m_Script: {fileID: 459098212, guid: 75be7af0b34ada5bff62a949a3c4181d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effectSpecifications:
+  _componentCache: {fileID: 0}
+  _effects:
   - _needId: ShantySpeaker
     _pointsPerHour: 0.3
     _satisfyToMaxValue: 0
---- !u!114 &-2561802151949959206
+--- !u!114 &-3754402086124859344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -328,9 +342,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2863585299073478030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff464b50cd2c4d6abaeaff245527f25e, type: 3}
+  m_Script: {fileID: 11500000, guid: 64adfc5092e14139a44c815745135266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentCache: {fileID: 0}
   _soundName: Music_MainMenu.Credits
 --- !u!1 &5828752212518718586
 GameObject:
@@ -344,7 +359,7 @@ GameObject:
   - component: {fileID: 556139891057738328}
   - component: {fileID: 831053783418050005}
   m_Layer: 0
-  m_Name: ConstructionSite1x1
+  m_Name: ConstructionBase1x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: -1942782917, guid: 40833514e55bcf2135fbcf9411078554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _modelName: ConstructionSites\ConstructionSite1x1\ConstructionSite1x1.Model
+  _modelName: ConstructionBases\ConstructionBase1x1\ConstructionBase1x1.Model
 --- !u!1 &7085017668101473028
 GameObject:
   m_ObjectHideFlags: 0
