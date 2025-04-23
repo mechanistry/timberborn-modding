@@ -1,7 +1,7 @@
 # Timberborn modding tools and examples
 
 ## Overview
-This project's intent is to make you familiar with the Timberborn modding pipeline. It contains three example mods that showcase basic modding possibilities - adding new buildings, adding your own scripts and overwriting existing game elements. There are also the tools for automatic Timberborn DLLs import and building the mods.
+This project's intent is to make you familiar with the Timberborn modding pipeline. It contains four example mods that showcase basic modding possibilities - adding new buildings, adding your own scripts and overwriting existing game elements. There are also the tools for automatic Timberborn DLLs import and building the mods.
 
 The repository also contains Timbermesh editor libraries, which allow you to use our [custom mesh format](https://github.com/mechanistry/timbermesh).
 
@@ -25,10 +25,10 @@ The best place to discuss the experimental build, as well as modding in general,
 
 If you start Timberborn, you should now see your mod in the mod manager.
 
-Keep in mind that many mods do not require Unity. For example, modifying existing specifications or adding new translations can be done without Unity. Keep reading to find out more.
+Keep in mind that many mods do not require Unity. For example, modifying existing blueprints or adding new translations can be done without Unity. Keep reading to find out more.
 
 ## Installing modding tools only (advanced)
-Instead of cloning this repository and using it as a base for your mods as described above, you can install the modding tools only. To do so, open the Package Manager in your Unity project and add the following package using the "Add package from git URL" option: `https://github.com/mechanistry/timberborn-modding.git?path=/Assets/Tools`
+Instead of cloning this repository and using it as a base for your mods as described above, you can install the modding tools only. To do so, open the Package Manager in your Unity project and add the following package using the "Install package from git URL" option: `https://github.com/mechanistry/timberborn-modding.git?path=/Assets/Tools`
 
 Remember to update the package to the latest version from time to time. If you want, you can switch to a certain branch or commit using advanced options described in the Unity documentation: https://docs.unity3d.com/Manual/upm-git.html#revision
 
@@ -48,6 +48,12 @@ Documents/
         └── MyFirstMod/
             ├── AssetBundles/
             │   └── ModAssets.assets
+            ├── Blueprints/
+            │   ├── Goods/
+            │   │   ├── Good.Berries.json
+            │   │   └── Good.Moonshine.json
+            │   └── Recipes/
+            │       └── Recipe.Antidote.json
             ├── Localizations/
             │   └── enUS_myMod.csv
             ├── Materials/
@@ -57,12 +63,6 @@ Documents/
             │               ├── BeaverAdult1.Folktails.png
             │               ├── BeaverAdult2.Folktails.png
             │               └── BeaverAdult3.Folktails.png
-            ├── Specifications/
-            │   ├── Goods/
-            │   │   ├── GoodSpecification.Berries.json
-            │   │   └── GoodSpecification.Moonshine.json
-            │   └── Recipes/
-            │       └── RecipeSpecification.Antidote.json
             ├── Sprites/
             │   └── Goods/
             │       ├── MoonshineIcon.png
@@ -120,39 +120,41 @@ Each mod has a `manifest.json` file in its root folder which looks as follows.
 
 RequiredMods and OptionalMods are dependecies for your mod, meaning the game will load them before your mod. The difference between them is that RequiredMods will trigger a warning icon in the mod manager if they are missing, while OptionalMods will not.
 
-## Specifications
-You can modify and extend many aspects of the game without using code, Unity, or other mods by simply placing a `.json` file in the correct folder. We call those files Specifications.
+## Blueprints
+You can modify and extend many aspects of the game without using code, Unity, or other mods by simply placing a `.json` file in the correct folder. We call those files Blueprints.
 
-For example, the game stores the Specification of the need Hunger in this file:
+For example, the game stores the Blueprint of the need Hunger in this file:
 ```
-Specifications/Needs/NeedSpecification.Beaver.Hunger.json
+Blueprints/Needs/Need.Beaver.Hunger.json
 ```
 
-If your mod contains a JSON file under a different path than any existing Specification, it is treated as a new Specification, for example a new need or a new good.
+If your mod contains a JSON file under a different path than any existing Blueprint, it is treated as a new Blueprint, for example a new need or a new good.
 
-If your mod contains a JSON file under the same path as an existing Specification, the mod's version modifies the original as follows:
+If your mod contains a JSON file under the same path as an existing Blueprint, the mod's version modifies the original as follows:
 * Fields with the same name replace the original values.
 * Any fields that are omitted retain their original values.
 * By default, list fields are overwritten by the mod's version just like any other field.
 * List fields with a `#append` postfix add its elements to the original list.
 * List fields with a `#remove` postfix remove the specified elements.
 
-For example, if you place the following in `Specifications/Goods/GoodSpecification.Carrot.json`, carrots will become twice as heavy but will satisfy thirst in addition to hunger:
+For example, if you place the following in `Blueprints/Goods/Good.Carrot.json`, carrots will become twice as heavy but will satisfy thirst in addition to hunger:
 ```
 {
-  "ConsumptionEffects#append": [
-    {
-      "NeedId": "Thirst",
-      "Points": 0.3
-    }
-  ],
-  "Weight": 2
+  "GoodSpec": {
+    "ConsumptionEffects#append": [
+      {
+        "NeedId": "Thirst",
+        "Points": 0.3
+      }
+    ],
+    "Weight": 2
+  }
 }
 ```
 
-Finally, if the file name ends with `.optional.json` for example `NeedSpecification.Beaver.Sport.optional.json`, it modifies an existing Specification only if it id already present in the base game or a different mod but is otherwise ignored. This allows you to support compatibility with other mods as well as older versions of the game.
+Finally, if the file name ends with `.optional.json` for example `Need.Beaver.Sport.optional.json`, it modifies an existing Blueprint only if it is already present in the base game or a different mod but is otherwise ignored. This allows you to support compatibility with other mods.
 
-You can use Specifications to add new or modify existing:
+You can use Blueprints to add new or modify existing:
 * Factions
 * Needs
 * Goods
@@ -179,7 +181,7 @@ Beaver.Homeless,Homeless,Signifies that the beaver has no home
 ...
 ```
 
-We call each of the entries a loc key. Loc keys can be accessed in multiple places in the project including code, json specifications and UI.
+We call each of the entries a loc key. Loc keys can be accessed in multiple places in the project including code, JSON Blueprints and UI.
 
 If you wish to add new content to the game in existing languages, you can add new loc keys by placing them in a new file named after the official file, followed by an underscore and a postfix of your choice. For example, if you wish to add new English texts, such as the name of a new food type, you can place them here:
 ```
@@ -223,7 +225,7 @@ All AssetBundles located in the mod's `AssetBundles` subfolder are loaded by the
 
 If an AssetBundle file name ends with `_win` or `_mac`, for example `MyFirstMod_win.asset`, that AssetBundle is only loaded on the corresponding operating system.
 
-Note that many types of assets can be added or modified without using AssetBundles or Unity by simply placing them in the correct subfolder as explained in other sections of the documentation. However, files packaged in an AssetBundle follow the same rules as files placed directly in the mod's folder. For example, they can add new JSON Specifications or modify existing ones.
+Note that many types of assets can be added or modified without using AssetBundles or Unity by simply placing them in the correct subfolder as explained in other sections of the documentation. However, files packaged in an AssetBundle follow the same rules as files placed directly in the mod's folder. For example, they can add new JSON Blueprints or modify existing ones.
 
 Some assets, notably Prefabs and sounds, can only be added by placing them in an AssetBundle.
 
