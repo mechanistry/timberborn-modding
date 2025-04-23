@@ -1,0 +1,11 @@
+{
+  "Name": "Year of the Snake Beaver Tails",
+  "Version": "1.1",
+  "Id": "Timberborn.ModExamples.YearOfTheSnakeBeaverTails",
+  "MinimumGameVersion": "0.7.6.0",
+  "Description": "The custom tail pattern, prepared by Mechanistry to celebrate the Year of the Snake.",
+  "RequiredMods": [
+  ],
+  "OptionalMods": [
+  ]
+}
