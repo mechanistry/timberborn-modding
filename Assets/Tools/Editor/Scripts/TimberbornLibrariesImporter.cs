@@ -13,9 +13,11 @@ namespace Timberborn.ModdingTools {
     public static readonly string PluginsDirectory = Path.Combine("Plugins", "Timberborn");
     private static readonly List<string> DllPatterns = new() {
         "Timberborn.*", "AWSSDK.*", "Bindito.*", "Castle.Core.dll",
-        "com.rlabrecque.steamworks.net.dll", "LINQtoCSV.dll", "Moq.dll", "protobuf-net.dll",
+        "com.rlabrecque.steamworks.net.dll", "LINQtoCSV.dll", "Moq.dll", "protobuf-net*",
         "System.Collections.Immutable.dll", "System.Runtime.CompilerServices.Unsafe.dll",
-        "System.Threading.Tasks.Extensions.dll"
+        "System.Threading.Tasks.Extensions.dll", "System.Diagnostics.EventLog.dll",
+        "System.Text.Encodings.Web.dll", "System.Text.Json.dll",
+        "Microsoft.Bcl.AsyncInterfaces.dll"
     };
     private static readonly string PublicizeDllPrefix = "Timberborn.";
 
