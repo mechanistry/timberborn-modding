@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -10,7 +11,10 @@ using UnityEngine;
 namespace Timberborn.ModdingTools {
   internal class TimberbornLibrariesImporter : EditorWindow {
 
-    public static readonly string PluginsDirectory = Path.Combine("Plugins", "Timberborn");
+    private static readonly string PluginsDirectory = "Plugins";
+    public static readonly string DllDirectory = Path.Combine(PluginsDirectory, "Timberborn");
+
+    private static readonly string ShadersDirectory = Path.Combine(PluginsDirectory, "Shaders");
     private static readonly List<string> DllPatterns = new() {
         "Timberborn.*", "AWSSDK.*", "Bindito.*", "Castle.Core.dll",
         "com.rlabrecque.steamworks.net.dll", "LINQtoCSV.dll", "Moq.dll", "protobuf-net*",
@@ -20,34 +24,39 @@ namespace Timberborn.ModdingTools {
         "Microsoft.Bcl.AsyncInterfaces.dll"
     };
     private static readonly string PublicizeDllPrefix = "Timberborn.";
+    private static readonly string ShadersZipSource = Path.Combine("Modding", "Shaders.zip");
 
     [MenuItem("Timberborn/Import Timberborn dlls", false, 0)]
     public static void Import() {
       var timberbornLibrariesFinder = new TimberbornLibrariesFinder();
-      if (timberbornLibrariesFinder.TryGetTimberbornLibrariesDirectory(out var dllDirectory)) {
-        Import(dllDirectory);
+      if (timberbornLibrariesFinder.TryGetTimberbornLibrariesDirectories(
+              out var dllDirectory, out var streamingAssetsDirectory)) {
+        ImportDLLs(dllDirectory);
+        if (streamingAssetsDirectory.Exists) {
+          ImportShaders(streamingAssetsDirectory);
+        }
+        AssetDatabase.Refresh();
       }
     }
 
-    private static void Import(DirectoryInfo dllDirectory) {
-      var pluginsPath = Path.Combine(Application.dataPath, PluginsDirectory);
-      RecreatePluginsDirectory(pluginsPath);
+    private static void ImportDLLs(DirectoryInfo dllDirectory) {
+      var dllPath = Path.Combine(Application.dataPath, DllDirectory);
+      RecreateDirectory(dllPath);
       var dllsCount = 0;
       foreach (var file in dllDirectory.GetFiles()) {
         if (ShouldBeImported(file)) {
-          ImportDll(pluginsPath, file);
+          ImportDll(dllPath, file);
           dllsCount++;
         }
       }
-      AssetDatabase.Refresh();
       Debug.Log($"Timberborn DLLs ({dllsCount}) imported successfully.");
     }
 
-    private static void RecreatePluginsDirectory(string pluginsPath) {
-      if (Directory.Exists(pluginsPath)) {
-        Directory.Delete(pluginsPath, true);
+    private static void RecreateDirectory(string path) {
+      if (Directory.Exists(path)) {
+        Directory.Delete(path, true);
       }
-      Directory.CreateDirectory(pluginsPath);
+      Directory.CreateDirectory(path);
     }
 
     private static bool ShouldBeImported(FileInfo fileInfo) {
@@ -77,6 +86,21 @@ namespace Timberborn.ModdingTools {
       var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
       var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(fileNameWithoutExtension));
       return new Guid(hash).ToString().ToLower().Replace("-", "");
+    }
+
+    private static void ImportShaders(DirectoryInfo streamingAssetsDirectory) {
+      var destinationDirectory = Path.Combine(Application.dataPath, ShadersDirectory);
+      RecreateDirectory(destinationDirectory);
+
+      var shadersPath = Path.Combine(streamingAssetsDirectory.FullName, ShadersZipSource);
+      using var zipToOpen = new FileStream(shadersPath, FileMode.Open);
+      using var archive = new ZipArchive(zipToOpen, ZipArchiveMode.Read);
+      foreach (var entry in archive.Entries) {
+        var destination = Path.Combine(destinationDirectory, entry.Name);
+        entry.ExtractToFile(destination, true);
+      }
+      var noMetaFilesCount = archive.Entries.Count / 2;
+      Debug.Log($"Timberborn Shaders ({noMetaFilesCount}) imported successfully.");
     }
 
   }

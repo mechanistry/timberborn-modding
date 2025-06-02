@@ -12,36 +12,44 @@ namespace Timberborn.ModdingTools {
         + "Make sure you selected directory with Timberborn exe file.";
     private readonly TimberbornPathPersistence _timberbornPathPersistence = new();
 
-    public bool TryGetTimberbornLibrariesDirectory(out DirectoryInfo librariesDirectory) {
+    public bool TryGetTimberbornLibrariesDirectories(out DirectoryInfo librariesDirectory,
+                                                     out DirectoryInfo streamingAssetsDirectory) {
       return Application.platform == RuntimePlatform.OSXEditor
-          ? TryGetTimberbornLibrariesOnMac(out librariesDirectory)
-          : TryGetTimberbornLibrariesOnWindows(out librariesDirectory);
+          ? TryGetTimberbornLibrariesOnMac(out librariesDirectory, out streamingAssetsDirectory)
+          : TryGetTimberbornLibrariesOnWindows(out librariesDirectory,
+                                               out streamingAssetsDirectory);
     }
 
-    private bool TryGetTimberbornLibrariesOnMac(out DirectoryInfo librariesDirectory) {
+    private bool TryGetTimberbornLibrariesOnMac(out DirectoryInfo librariesDirectory,
+                                                out DirectoryInfo streamingAssetsDirectory) {
       var buildPath = EditorUtility.OpenFilePanel("Open Timberborn app",
                                                   GetSavedBuildPath(), "app");
       _timberbornPathPersistence.SavePath(buildPath);
       librariesDirectory = new(Path.Combine(buildPath, "Contents", "Resources", "Data", "Managed"));
+      streamingAssetsDirectory =
+          new(Path.Combine(buildPath, "Contents", "Resources", "Data", "StreamingAssets"));
       if (librariesDirectory.Exists) {
         return true;
       }
       if (!string.IsNullOrEmpty(buildPath) && ShowTryAgainDialog(MacNotFoundMessage)) {
-        return TryGetTimberbornLibrariesOnMac(out librariesDirectory);
+        return TryGetTimberbornLibrariesOnMac(out librariesDirectory, out streamingAssetsDirectory);
       }
       return false;
     }
 
-    private bool TryGetTimberbornLibrariesOnWindows(out DirectoryInfo librariesDirectory) {
+    private bool TryGetTimberbornLibrariesOnWindows(out DirectoryInfo librariesDirectory,
+                                                    out DirectoryInfo streamingAssetsDirectory) {
       var buildPath = EditorUtility.OpenFolderPanel("Open Timberborn directory",
                                                     GetSavedBuildPath(), "");
       _timberbornPathPersistence.SavePath(buildPath);
       librariesDirectory = new(Path.Combine(buildPath, "Timberborn_Data", "Managed"));
+      streamingAssetsDirectory = new(Path.Combine(buildPath, "Timberborn_Data", "StreamingAssets"));
       if (librariesDirectory.Exists) {
         return true;
       }
       if (!string.IsNullOrEmpty(buildPath) && ShowTryAgainDialog(WindowsNotFoundMessage)) {
-        return TryGetTimberbornLibrariesOnWindows(out librariesDirectory);
+        return TryGetTimberbornLibrariesOnWindows(out librariesDirectory,
+                                                  out streamingAssetsDirectory);
       }
       return false;
     }

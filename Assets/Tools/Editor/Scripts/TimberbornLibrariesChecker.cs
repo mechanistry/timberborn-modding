@@ -20,10 +20,9 @@ namespace Timberborn.ModdingTools {
     }
 
     private static bool LibrariesExist() {
-      var pluginsPath = Path.Combine(Application.dataPath,
-                                     TimberbornLibrariesImporter.PluginsDirectory);
-      var pluginsDirectory = new DirectoryInfo(pluginsPath);
-      return pluginsDirectory.Exists && pluginsDirectory.EnumerateFiles(TimberbornDllPattern).Any();
+      var dllPath = Path.Combine(Application.dataPath, TimberbornLibrariesImporter.DllDirectory);
+      var dllDirectory = new DirectoryInfo(dllPath);
+      return dllDirectory.Exists && dllDirectory.EnumerateFiles(TimberbornDllPattern).Any();
     }
 
     private static void ShowImportDialog() {
