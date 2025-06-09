@@ -16,8 +16,8 @@ The best place to discuss the experimental build, as well as modding in general,
 3. Add the project to Unity Hub but do not open it yet.
 4. In Unity Hub, add `-disable-assembly-updater` as a command line argument to the project.
 5. Open the project, do not enter Safe Mode - select Ignore from prompt.
-6. You should see a prompt asking you to import Timberborn DLLs. Select the folder where your Timberborn is installed.
-   - You can always trigger DLLs import manually, by selecting "Timberborn" > "Import Timberborn dlls" from the toolbar.
+6. You should see a prompt asking you to import Timberborn libraries. Select the folder where your Timberborn is installed.
+   - You can always trigger DLLs import manually, by selecting "Timberborn" > "Import Timberborn DLLs and shaders" from the toolbar.
 7. Wait for the import to complete and the project to open.
 8. In the toolbar click "Timberborn" > "Show Mod Builder". There you can choose whether you want to build all or selected mods found in the project.
    - The mod builder places the resulting files in `Documents/Timberborn/Mods`, including your code and asset bundles.

@@ -26,7 +26,7 @@ namespace Timberborn.ModdingTools {
     private static readonly string PublicizeDllPrefix = "Timberborn.";
     private static readonly string ShadersZipSource = Path.Combine("Modding", "Shaders.zip");
 
-    [MenuItem("Timberborn/Import Timberborn dlls", false, 0)]
+    [MenuItem("Timberborn/Import Timberborn DLLs and shaders", false, 0)]
     public static void Import() {
       var timberbornLibrariesFinder = new TimberbornLibrariesFinder();
       if (timberbornLibrariesFinder.TryGetTimberbornLibrariesDirectories(
