@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Timberborn.ModdingTools {
@@ -13,7 +14,7 @@ namespace Timberborn.ModdingTools {
       var button = root.Q<Button>("BrowseModsDirectoryButton");
       button.RegisterCallback<ClickEvent>(_ => BrowseModsDirectory());
     }
-    
+
     public void OpenDirectoryIfEnabled() {
       if (_browseModsDirectoryToggle.value) {
         BrowseModsDirectory();
@@ -21,7 +22,11 @@ namespace Timberborn.ModdingTools {
     }
 
     private static void BrowseModsDirectory() {
-      Application.OpenURL(ModDirectories.ModsDirectory);
+      if (Application.platform == RuntimePlatform.OSXEditor) {
+        Process.Start("open", ModDirectories.ModsDirectory);
+      } else {
+        Application.OpenURL(ModDirectories.ModsDirectory);
+      }
     }
 
   }
