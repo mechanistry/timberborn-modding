@@ -4,6 +4,7 @@ using System.IO.Compression;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
+using UnityEngine;
 
 namespace Timberborn.ModdingTools {
   internal class ModBuilder {
@@ -36,7 +37,8 @@ namespace Timberborn.ModdingTools {
 
     private static bool TryBuildProject(string buildPath) {
       var buildOptions = new BuildPlayerOptions {
-          target = BuildTarget.StandaloneWindows64,
+          target = Application.platform == RuntimePlatform.OSXEditor ? 
+              BuildTarget.StandaloneOSX : BuildTarget.StandaloneWindows64,
           locationPathName = buildPath,
           scenes = EditorBuildSettings.scenes.Select(scene => scene.path).ToArray()
       };
