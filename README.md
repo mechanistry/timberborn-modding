@@ -291,3 +291,23 @@ You can also view logs using the in-game console which by default can be accesse
 Timberborn supports two mod providers: [Steam Workshop](https://steamcommunity.com/app/1062090/workshop/) and [mod.io](https://mod.io/g/timberborn/).
 
 You can upload your mod to the Steam Workshop by using the in-game upload panel, which you can access by clicking the `Upload` button in the Mod Manager in the main menu. Upload to mod.io can be done by a browser, on its website.
+
+
+## Developing mods on Linux
+
+Even though Linux is not supported, it is possible to develop mods on Linux. You will need to make the following changes:
+
+The mods are places in `~/Timberborn/Mods` but the game (if played through Steam) is located at `~/.local/share/Steam/steamapps/compatdata/1062090/pfx/drive_c/users/steamuser/Documents/Timberborn/Mods`. You can make a symlink to make this easier for you:
+
+```bash
+cd ~/
+mkdir Timberborn
+cd Timberborn
+ln -s ../.local/share/Steam/steamapps/compatdata/1062090/pfx/drive_c/users/steamuser/Documents/Timberborn/Mods Mods
+```
+
+Other files and folders are also in `~/.local/share/Steam/steamapps/compatdata/1062090/pfx/drive_c/users/steamuser/Documents/Timberborn/`, for example error reports.
+
+When you need to import the timberborn DLLs in unity:
+- Go to `.steam/steam/steamapps/common`
+- Select (not enter) `Timberborn` folder
