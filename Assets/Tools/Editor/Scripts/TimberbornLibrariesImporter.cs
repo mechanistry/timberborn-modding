@@ -20,8 +20,7 @@ namespace Timberborn.ModdingTools {
         "com.rlabrecque.steamworks.net.dll", "LINQtoCSV.dll", "Moq.dll", "protobuf-net*",
         "System.Collections.Immutable.dll", "System.Runtime.CompilerServices.Unsafe.dll",
         "System.Threading.Tasks.Extensions.dll", "System.Diagnostics.EventLog.dll",
-        "System.Text.Encodings.Web.dll", "System.Text.Json.dll",
-        "Microsoft.Bcl.AsyncInterfaces.dll"
+        "System.Text.Encodings.Web.dll", "System.Text.Json.dll", "Microsoft.*"
     };
     private static readonly string PublicizeDllPrefix = "Timberborn.";
     private static readonly string ShadersZipSource = Path.Combine("Modding", "Shaders.zip");
