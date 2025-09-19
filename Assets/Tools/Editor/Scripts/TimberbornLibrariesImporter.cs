@@ -4,7 +4,6 @@ using System.IO;
 using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,12 +20,15 @@ namespace Timberborn.ModdingTools {
     private static readonly string BlueprintsKey = "Blueprints";
     private static readonly string LocalizationsKey = "Localizations";
     private static readonly string UIKey = "UI";
-    private static readonly List<string> DllPatterns = new() {
-        "Timberborn.*", "AWSSDK.*", "Bindito.*", "Castle.Core.dll",
-        "com.rlabrecque.steamworks.net.dll", "LINQtoCSV.dll", "Moq.dll", "protobuf-net*",
-        "System.Collections.Immutable.dll", "System.Runtime.CompilerServices.Unsafe.dll",
-        "System.Threading.Tasks.Extensions.dll", "System.Diagnostics.EventLog.dll",
-        "System.Text.Encodings.Web.dll", "System.Text.Json.dll", "Microsoft.*"
+    private static readonly List<string> ExcludedDllPrefixes = new()
+        { "Mono.", "mscorlib.", "Newtonsoft.", "netstandard", "System.", "Unity.", "UnityEngine." };
+    private static readonly List<string> AlwaysImportedDlls = new() {
+        "System.Collections.Immutable.dll",
+        "System.Runtime.CompilerServices.Unsafe.dll",
+        "System.Threading.Tasks.Extensions.dll",
+        "System.Diagnostics.EventLog.dll",
+        "System.Text.Encodings.Web.dll",
+        "System.Text.Json.dll"
     };
     private static readonly string PublicizeDllPrefix = "Timberborn.";
 
@@ -58,12 +60,15 @@ namespace Timberborn.ModdingTools {
     }
 
     private static bool ShouldBeImported(FileInfo fileInfo) {
-      foreach (var dllPattern in DllPatterns) {
-        if (Regex.IsMatch(fileInfo.Name, dllPattern)) {
-          return true;
+      if (AlwaysImportedDlls.Contains(fileInfo.Name)) {
+        return true;
+      }
+      foreach (var prefix in ExcludedDllPrefixes) {
+        if (fileInfo.Name.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase)) {
+          return false;
         }
       }
-      return false;
+      return true;
     }
 
     private static void ImportDll(string destinationPath, FileInfo file) {
