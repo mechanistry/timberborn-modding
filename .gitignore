@@ -7,10 +7,8 @@
 /UserSettings/
 
 /Assets/AssetStoreTools*
-/Assets/Plugins/Timberborn/
-/Assets/Plugins/Timberborn.meta
-/Assets/Plugins/Shaders/
-/Assets/Plugins/Shaders.meta
+/Assets/Plugins/Timberborn*
+/Assets/Tools/ImportedAssets*
 
 # Visual Studio 2015 cache directory
 /.vs/
