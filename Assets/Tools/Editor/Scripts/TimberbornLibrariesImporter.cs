@@ -20,6 +20,8 @@ namespace Timberborn.ModdingTools {
     private static readonly string BlueprintsKey = "Blueprints";
     private static readonly string LocalizationsKey = "Localizations";
     private static readonly string UIKey = "UI";
+    private static readonly string EditorDllKey = "EditorDll";
+    private static readonly string EditorUIKey = "EditorUI";
     private static readonly List<string> ExcludedDllPrefixes = new()
         { "Mono.", "mscorlib.", "Newtonsoft.", "netstandard", "System.", "Unity.", "UnityEngine." };
     private static readonly List<string> AlwaysImportedDlls = new() {
@@ -97,6 +99,8 @@ namespace Timberborn.ModdingTools {
       Import(BlueprintsKey, streamingAssetsDirectory, BlueprintsKey);
       Import(LocalizationsKey, streamingAssetsDirectory, LocalizationsKey);
       Import(UIKey, streamingAssetsDirectory, UIKey);
+      Import(EditorDllKey, streamingAssetsDirectory, EditorDllKey);
+      Import(EditorUIKey, streamingAssetsDirectory, UIKey);
     }
 
     private static void RecreateDirectory(string path) {
