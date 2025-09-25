@@ -39,12 +39,10 @@ namespace Timberborn.ModdingTools {
       var timberbornLibrariesFinder = new TimberbornLibrariesFinder();
       if (timberbornLibrariesFinder.TryGetTimberbornLibrariesDirectories(
               out var dllDirectory, out var streamingAssetsDirectory)) {
-        AssetDatabase.StartAssetEditing();
         ImportDLLs(dllDirectory);
         if (streamingAssetsDirectory.Exists) {
           ImportAssets(streamingAssetsDirectory);
         }
-        AssetDatabase.StopAssetEditing();
         AssetDatabase.Refresh();
       }
     }
@@ -98,7 +96,7 @@ namespace Timberborn.ModdingTools {
       Import(ShadersKey, streamingAssetsDirectory, ShadersKey);
       Import(BlueprintsKey, streamingAssetsDirectory, BlueprintsKey);
       Import(LocalizationsKey, streamingAssetsDirectory, LocalizationsKey);
-      Import(UIKey, streamingAssetsDirectory, UIKey);
+      Import(UIKey, streamingAssetsDirectory, UIKey, ".txt");
       Import(EditorDllKey, streamingAssetsDirectory, EditorDllKey);
       Import(EditorUIKey, streamingAssetsDirectory, UIKey);
     }
@@ -111,28 +109,30 @@ namespace Timberborn.ModdingTools {
     }
 
     private static void Import(string name, DirectoryInfo streamingAssetsDirectory,
-                               string destinationDirectory) {
+                               string destinationDirectory, string fileExtension = "") {
       var destinationPath = Path.Combine(ResourcesPath, destinationDirectory);
       var sourcePath = Path.Combine(streamingAssetsDirectory.FullName, "Modding", $"{name}.zip");
       if (File.Exists(sourcePath)) {
-        Import(destinationPath, sourcePath, name);
+        Import(destinationPath, sourcePath, name, fileExtension);
       } else {
         Debug.LogWarning($"Unable to import: {name}. Zip file not found at {sourcePath}");
       }
     }
 
-    private static void Import(string destinationPath, string sourcePath, string name) {
+    private static void Import(string destinationPath, string sourcePath, string name,
+                               string fileExtension) {
       using var zipToOpen = new FileStream(sourcePath, FileMode.Open);
       using var archive = new ZipArchive(zipToOpen, ZipArchiveMode.Read);
       foreach (var entry in archive.Entries) {
-        ImportEntry(destinationPath, entry);
+        ImportEntry(destinationPath, entry, fileExtension);
       }
       Debug.Log($"Timberborn {name} ({archive.Entries.Count} files) imported successfully.");
     }
 
-    private static void ImportEntry(string destinationPath, ZipArchiveEntry entry) {
+    private static void ImportEntry(string destinationPath, ZipArchiveEntry entry,
+                                    string fileExtension) {
       var fullNameSanitized = entry.FullName.Replace('/', Path.DirectorySeparatorChar);
-      var destination = Path.Combine(destinationPath, fullNameSanitized);
+      var destination = $"{Path.Combine(destinationPath, fullNameSanitized)}{fileExtension}";
       var entryDirectory = Path.GetDirectoryName(destination);
       if (entryDirectory != null && !Directory.Exists(entryDirectory)) {
         Directory.CreateDirectory(entryDirectory);
