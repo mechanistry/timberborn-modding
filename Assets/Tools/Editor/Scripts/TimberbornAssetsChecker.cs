@@ -4,23 +4,23 @@ using UnityEditor;
 
 namespace Timberborn.ModdingTools {
   [InitializeOnLoad]
-  internal static class TimberbornLibrariesChecker {
+  internal static class TimberbornAssetsChecker {
 
-    private static readonly string LibrariesCheckedKey = "TimberbornLibrariesChecked";
+    private static readonly string AssetsCheckedKey = "TimberbornAssetsChecked";
     private static readonly string TimberbornDllPattern = "Timberborn.*.dll";
 
-    static TimberbornLibrariesChecker() {
-      if (!SessionState.GetBool(LibrariesCheckedKey, false)) {
+    static TimberbornAssetsChecker() {
+      if (!SessionState.GetBool(AssetsCheckedKey, false)) {
         if (!LibrariesExist()) {
           ShowImportDialog();
         }
-        SessionState.SetBool(LibrariesCheckedKey, true);
+        SessionState.SetBool(AssetsCheckedKey, true);
       }
     }
 
     private static bool LibrariesExist() {
-      var dllDirectory = new DirectoryInfo(TimberbornLibrariesImporter.DllPath);
-      var assetsDirectory = new DirectoryInfo(TimberbornLibrariesImporter.ImportedAssetsPath);
+      var dllDirectory = new DirectoryInfo(TimberbornAssetsImporter.DllPath);
+      var assetsDirectory = new DirectoryInfo(TimberbornAssetsImporter.ImportedAssetsPath);
       return dllDirectory.Exists
              && dllDirectory.EnumerateFiles(TimberbornDllPattern).Any()
              && assetsDirectory.Exists
@@ -32,7 +32,7 @@ namespace Timberborn.ModdingTools {
                                       "Timberborn libraries were not found in the project. "
                                       + "Would you like to open Timberborn game directory "
                                       + "and import them now?", "Yes", "No")) {
-        TimberbornLibrariesImporter.Import();
+        TimberbornAssetsImporter.Import();
       }
     }
 

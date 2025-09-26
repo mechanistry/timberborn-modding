@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Timberborn.ModdingTools {
-  internal class TimberbornLibrariesImporter : EditorWindow {
+  internal class TimberbornAssetsImporter : EditorWindow {
 
     public static readonly string DllPath =
         Path.Combine(Application.dataPath, "Plugins", "Timberborn");
@@ -36,9 +36,9 @@ namespace Timberborn.ModdingTools {
 
     [MenuItem("Timberborn/Import Timberborn DLLs and assets", false, 0)]
     public static void Import() {
-      var timberbornLibrariesFinder = new TimberbornLibrariesFinder();
-      if (timberbornLibrariesFinder.TryGetTimberbornLibrariesDirectories(
-              out var dllDirectory, out var streamingAssetsDirectory)) {
+      var timberbornDirectoryFinder = new TimberbornDirectoryFinder();
+      if (timberbornDirectoryFinder.TryGetDirectories(out var dllDirectory,
+                                                      out var streamingAssetsDirectory)) {
         ImportDLLs(dllDirectory);
         if (streamingAssetsDirectory.Exists) {
           ImportAssets(streamingAssetsDirectory);

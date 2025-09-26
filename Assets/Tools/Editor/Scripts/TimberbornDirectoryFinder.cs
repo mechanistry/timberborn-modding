@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace Timberborn.ModdingTools {
-  internal class TimberbornLibrariesFinder {
+  internal class TimberbornDirectoryFinder {
 
     private static readonly string MacNotFoundMessage =
         "File wasn't recognized as Timberborn build. Make sure you selected Timberborn app file.";
@@ -12,16 +12,15 @@ namespace Timberborn.ModdingTools {
         + "Make sure you selected directory with Timberborn exe file.";
     private readonly TimberbornPathPersistence _timberbornPathPersistence = new();
 
-    public bool TryGetTimberbornLibrariesDirectories(out DirectoryInfo librariesDirectory,
-                                                     out DirectoryInfo streamingAssetsDirectory) {
+    public bool TryGetDirectories(out DirectoryInfo librariesDirectory,
+                                  out DirectoryInfo streamingAssetsDirectory) {
       return Application.platform == RuntimePlatform.OSXEditor
-          ? TryGetTimberbornLibrariesOnMac(out librariesDirectory, out streamingAssetsDirectory)
-          : TryGetTimberbornLibrariesOnWindows(out librariesDirectory,
-                                               out streamingAssetsDirectory);
+          ? TryGetMacDirectories(out librariesDirectory, out streamingAssetsDirectory)
+          : TryGetWindowsDirectories(out librariesDirectory, out streamingAssetsDirectory);
     }
 
-    private bool TryGetTimberbornLibrariesOnMac(out DirectoryInfo librariesDirectory,
-                                                out DirectoryInfo streamingAssetsDirectory) {
+    private bool TryGetMacDirectories(out DirectoryInfo librariesDirectory,
+                                      out DirectoryInfo streamingAssetsDirectory) {
       var buildPath = EditorUtility.OpenFilePanel("Open Timberborn app",
                                                   GetSavedBuildPath(), "app");
       _timberbornPathPersistence.SavePath(buildPath);
@@ -32,13 +31,13 @@ namespace Timberborn.ModdingTools {
         return true;
       }
       if (!string.IsNullOrEmpty(buildPath) && ShowTryAgainDialog(MacNotFoundMessage)) {
-        return TryGetTimberbornLibrariesOnMac(out librariesDirectory, out streamingAssetsDirectory);
+        return TryGetMacDirectories(out librariesDirectory, out streamingAssetsDirectory);
       }
       return false;
     }
 
-    private bool TryGetTimberbornLibrariesOnWindows(out DirectoryInfo librariesDirectory,
-                                                    out DirectoryInfo streamingAssetsDirectory) {
+    private bool TryGetWindowsDirectories(out DirectoryInfo librariesDirectory,
+                                          out DirectoryInfo streamingAssetsDirectory) {
       var buildPath = EditorUtility.OpenFolderPanel("Open Timberborn directory",
                                                     GetSavedBuildPath(), "");
       _timberbornPathPersistence.SavePath(buildPath);
@@ -48,8 +47,8 @@ namespace Timberborn.ModdingTools {
         return true;
       }
       if (!string.IsNullOrEmpty(buildPath) && ShowTryAgainDialog(WindowsNotFoundMessage)) {
-        return TryGetTimberbornLibrariesOnWindows(out librariesDirectory,
-                                                  out streamingAssetsDirectory);
+        return TryGetWindowsDirectories(out librariesDirectory,
+                                        out streamingAssetsDirectory);
       }
       return false;
     }
