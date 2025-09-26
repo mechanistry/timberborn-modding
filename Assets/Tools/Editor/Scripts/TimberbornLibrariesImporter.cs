@@ -12,7 +12,7 @@ namespace Timberborn.ModdingTools {
 
     public static readonly string DllPath =
         Path.Combine(Application.dataPath, "Plugins", "Timberborn");
-    private static readonly string ImportedAssetsPath =
+    public static readonly string ImportedAssetsPath =
         Path.Combine(Application.dataPath, "Tools", "ImportedAssets");
     private static readonly string ResourcesPath =
         Path.Combine(ImportedAssetsPath, "Editor", "Resources");

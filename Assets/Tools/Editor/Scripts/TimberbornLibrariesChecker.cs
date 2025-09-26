@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
 using UnityEditor;
-using UnityEngine;
 
 namespace Timberborn.ModdingTools {
   [InitializeOnLoad]
@@ -21,7 +20,11 @@ namespace Timberborn.ModdingTools {
 
     private static bool LibrariesExist() {
       var dllDirectory = new DirectoryInfo(TimberbornLibrariesImporter.DllPath);
-      return dllDirectory.Exists && dllDirectory.EnumerateFiles(TimberbornDllPattern).Any();
+      var assetsDirectory = new DirectoryInfo(TimberbornLibrariesImporter.ImportedAssetsPath);
+      return dllDirectory.Exists
+             && dllDirectory.EnumerateFiles(TimberbornDllPattern).Any()
+             && assetsDirectory.Exists
+             && assetsDirectory.EnumerateFiles().Any();
     }
 
     private static void ShowImportDialog() {
