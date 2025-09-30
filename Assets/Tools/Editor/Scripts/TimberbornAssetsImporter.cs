@@ -94,7 +94,7 @@ namespace Timberborn.ModdingTools {
     private static void ImportAssets(DirectoryInfo streamingAssetsDirectory) {
       RecreateDirectory(ImportedAssetsPath);
       Import(ShadersKey, streamingAssetsDirectory, ShadersKey);
-      Import(BlueprintsKey, streamingAssetsDirectory, BlueprintsKey);
+      Import(BlueprintsKey, streamingAssetsDirectory);
       Import(LocalizationsKey, streamingAssetsDirectory, LocalizationsKey);
       Import(UIKey, streamingAssetsDirectory, UIKey, ".txt");
       Import(EditorDllKey, streamingAssetsDirectory, EditorDllKey);
@@ -109,7 +109,7 @@ namespace Timberborn.ModdingTools {
     }
 
     private static void Import(string name, DirectoryInfo streamingAssetsDirectory,
-                               string destinationDirectory, string fileExtension = "") {
+                               string destinationDirectory = "", string fileExtension = "") {
       var destinationPath = Path.Combine(ResourcesPath, destinationDirectory);
       var sourcePath = Path.Combine(streamingAssetsDirectory.FullName, "Modding", $"{name}.zip");
       if (File.Exists(sourcePath)) {
