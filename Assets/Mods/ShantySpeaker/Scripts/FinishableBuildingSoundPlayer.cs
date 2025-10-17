@@ -6,6 +6,7 @@ using Timberborn.SoundSystem;
 
 namespace Mods.ShantySpeaker.Scripts {
   internal class FinishableBuildingSoundPlayer : BaseComponent,
+                                                 IAwakableComponent,
                                                  IFinishedStateListener {
 
     private ISoundSystem _soundSystem;
@@ -17,16 +18,16 @@ namespace Mods.ShantySpeaker.Scripts {
     }
 
     public void Awake() {
-      _spec = GetComponentFast<FinishableBuildingSoundPlayerSpec>();
+      _spec = GetComponent<FinishableBuildingSoundPlayerSpec>();
     }
 
     public void OnEnterFinishedState() {
-      _soundSystem.LoopSingle3DSound(GameObjectFast, SoundName, 128);
-      _soundSystem.SetCustomMixer(GameObjectFast, SoundName, MixerNames.BuildingMixerNameKey);
+      _soundSystem.LoopSingle3DSound(GameObject, SoundName, 128);
+      _soundSystem.SetCustomMixer(GameObject, SoundName, MixerNames.BuildingMixerNameKey);
     }
 
     public void OnExitFinishedState() {
-      _soundSystem.StopSound(GameObjectFast, SoundName);
+      _soundSystem.StopSound(GameObject, SoundName);
     }
 
     private string SoundName => _spec.SoundName;

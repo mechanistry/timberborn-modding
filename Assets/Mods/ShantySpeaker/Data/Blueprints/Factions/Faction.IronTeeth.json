@@ -1,7 +1,0 @@
-{
-  "FactionSpec": {
-    "Needs#append": [
-      "ShantySpeaker"
-    ]
-  }
-}

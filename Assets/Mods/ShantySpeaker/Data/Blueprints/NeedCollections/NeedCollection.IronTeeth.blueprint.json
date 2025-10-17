@@ -1,0 +1,8 @@
+{
+  "NeedCollectionSpec": {
+    "CollectionId": "IronTeeth",
+    "Needs#append": [
+      "ShantySpeaker"
+    ]
+  }
+}

@@ -1,11 +1,13 @@
 using Bindito.Core;
-using Timberborn.TemplateSystem;
+using Timberborn.TemplateInstantiation;
 
 namespace Mods.ShantySpeaker.Scripts {
   [Context("Game")]
   public class ShantySpeakerConfigurator : Configurator {
 
     protected override void Configure() {
+      Bind<FinishableBuildingSoundPlayer>().AsTransient();
+
       MultiBind<TemplateModule>().ToProvider(ProvideTemplateModule).AsSingleton();
     }
 

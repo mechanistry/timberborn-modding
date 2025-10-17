@@ -1,13 +1,10 @@
-﻿using Timberborn.BaseComponentSystem;
-using UnityEngine;
+﻿using Timberborn.BlueprintSystem;
 
 namespace Mods.ShantySpeaker.Scripts {
-  internal class FinishableBuildingSoundPlayerSpec : BaseComponent {
+  internal record FinishableBuildingSoundPlayerSpec : ComponentSpec {
 
-    [SerializeField]
-    private string _soundName;
-
-    public string SoundName => _soundName;
+    [Serialize]
+    public string SoundName { get; init; }
 
   }
 }

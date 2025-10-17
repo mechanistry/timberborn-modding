@@ -1,0 +1,164 @@
+{
+  "BuildingSpec": {
+    "SelectionSoundName": "Default",
+    "LoopingSoundName": "",
+    "BuildingCost": [
+      {
+        "Id": "Log",
+        "Amount": 10
+      },
+      {
+        "Id": "MetalBlock",
+        "Amount": 10
+      }
+    ],
+    "ScienceCost": 300,
+    "PlaceFinished": false,
+    "FinishableWithBeaversOnSite": false,
+    "DrawRangeBoundsOnIt": false
+  },
+  "BuildingModelSpec": {
+    "FinishedModelName": "#Finished",
+    "UnfinishedModelName": "#Unfinished",
+    "FinishedUncoveredModelName": "",
+    "UndergroundModelName": "",
+    "ConstructionModeModel": "Finished",
+    "UndergroundModelDepth": 0
+  },
+  "BlockObjectSpec": {
+    "BlocksSpec": {
+      "Size": {
+        "X": 1,
+        "Y": 1,
+        "Z": 2
+      },
+      "BlockSpecs": [
+        {
+          "MatterBelow": "GroundOrStackable",
+          "Occupations": "-1",
+          "Stackable": "None",
+          "OccupyAllBelow": false,
+          "Underground": false
+        },
+        {
+          "MatterBelow": "Any",
+          "Occupations": "-1",
+          "Stackable": "None",
+          "OccupyAllBelow": false,
+          "Underground": false
+        }
+      ]
+    },
+    "Entrance": {
+      "HasEntrance": false,
+      "Coordinates": {
+        "X": 0,
+        "Y": 0,
+        "Z": 0
+      }
+    },
+    "BaseZ": 0,
+    "Overridable": false,
+    "Flippable": false
+  },
+  "TemplateSpec": {
+    "TemplateName": "ShantySpeaker.IronTeeth",
+    "BackwardCompatibleTemplateNames": [],
+    "RequiredFeatureToggle": "",
+    "DisablingFeatureToggle": ""
+  },
+  "PlaceableBlockObjectSpec": {
+    "ToolGroupId": "Decoration",
+    "ToolOrder": 45,
+    "ToolShape": "Square",
+    "Layout": "Single",
+    "CustomPivot": {
+      "HasCustomPivot": false,
+      "Coordinates": {
+        "X": 0.0,
+        "Y": 0.0,
+        "Z": 0.0
+      }
+    },
+    "CanBeAttachedToTerrainSide": false,
+    "DevModeTool": false
+  },
+  "BlockableObjectAnimationControllerSpec": {},
+  "LabeledEntitySpec": {
+    "DisplayNameLocKey": "Building.ShantySpeaker.DisplayName",
+    "DescriptionLocKey": "Building.ShantySpeaker.Description",
+    "FlavorDescriptionLocKey": "",
+    "Icon": "Buildings/Decorations/ShantySpeaker/ShantySpeakerIcon"
+  },
+  "RangedEffectBuildingSpec": {
+    "EffectRadius": 8
+  },
+  "ContinuousEffectBuildingSpec": {
+    "Effects": [
+      {
+        "NeedId": "ShantySpeaker",
+        "PointsPerHour": 0.3,
+        "SatisfyToMaxValue": false
+      }
+    ]
+  },
+  "FinishableBuildingSoundPlayerSpec": {
+    "SoundName": "Music_MainMenu.Credits"
+  },
+  "Children": {
+    "#Finished": {
+      "TimbermeshSpec": {
+        "Model": "Buildings/Decorations/ShantySpeaker/ShantySpeaker.IronTeeth.Model"
+      },
+      "CollidersSpec": {
+        "BoxColliders": [
+          {
+            "Center": {
+              "X": 0.5,
+              "Y": 0.25,
+              "Z": 0.5
+            },
+            "Size": {
+              "X": 0.8,
+              "Y": 0.5,
+              "Z": 0.8
+            }
+          },
+          {
+            "Center": {
+              "X": 0.5,
+              "Y": 1.0,
+              "Z": 0.5
+            },
+            "Size": {
+              "X": 0.2,
+              "Y": 1.5,
+              "Z": 0.2
+            }
+          },
+          {
+            "Center": {
+              "X": 0.5,
+              "Y": 1.6,
+              "Z": 0.5
+            },
+            "Size": {
+              "X": 0.8,
+              "Y": 0.5,
+              "Z": 0.8
+            }
+          }
+        ],
+        "SphereColliders": [],
+        "CapsuleColliders": []
+      }
+    },
+    "#Unfinished": {
+      "Children": {
+        "ConstructionBase1x1#nested": {
+          "BlueprintPath": "ConstructionBases/ConstructionBase1x1/ConstructionBase1x1.blueprint"
+        }
+      }
+    }
+  }
+}
