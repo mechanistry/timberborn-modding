@@ -1,0 +1,10 @@
+{
+  "BuildingSpec": {
+    "BuildingCost#remove": [
+      {
+        "Id": "TreatedPlank",
+        "Amount": 25
+      }
+    ]
+  }
+}

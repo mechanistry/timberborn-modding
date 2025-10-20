@@ -1,0 +1,10 @@
+{
+  "RecipeSpec": {
+    "Ingredients#append": [
+      {
+        "Id": "Grease",
+        "Amount": 2
+      }
+    ]
+  }
+}

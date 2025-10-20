@@ -1,0 +1,15 @@
+{
+  "GrowableSpec": {
+    "GrowthTimeInDays": 8
+  },
+  "WateredNaturalResourceSpec": {
+    "DaysToDieDry": 5.0
+  },
+  "CuttableSpec": {
+    "YielderSpec": {
+      "Yield": {
+        "Amount": 4
+      }
+    }
+  }
+}
