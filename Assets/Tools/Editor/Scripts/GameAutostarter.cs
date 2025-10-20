@@ -56,10 +56,13 @@ namespace Timberborn.ModdingTools {
 
     private void RunFromFile() {
       var gamePath = _gamePath.value;
-      if (new FileInfo(gamePath).Exists) {
+      var fileInfo = new FileInfo(gamePath);
+      if (fileInfo.Exists && fileInfo.DirectoryName != null) {
         var processStartInfo = new ProcessStartInfo(gamePath) {
             WindowStyle = ProcessWindowStyle.Normal,
-            Arguments = GetCustomArguments(string.Empty)
+            Arguments = GetCustomArguments(string.Empty),
+            WorkingDirectory = fileInfo.DirectoryName,
+            UseShellExecute = false
         };
         Process.Start(processStartInfo);
       } else {
