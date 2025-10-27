@@ -42,7 +42,7 @@ namespace Mods.HelloWorld.Scripts {
 
       public EntityPanelModule Get() {
         var builder = new EntityPanelModule.Builder();
-        builder.AddTopFragment(_helloWorldFragment);
+        builder.AddTopFragment(_helloWorldFragment, -100);
         return builder.Build();
       }
 
