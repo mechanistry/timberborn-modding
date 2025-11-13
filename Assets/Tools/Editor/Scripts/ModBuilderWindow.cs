@@ -1,17 +1,14 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Timberborn.ModdingTools {
   internal class ModBuilderWindow : EditorWindow {
 
-    private static readonly string ModsDirectory = "Assets/Mods";
-    private static readonly string ModManifest = "manifest.json";
     private readonly ModBuilderControlsPersistence _modBuilderControlsPersistence = new();
     private readonly GameAutostarter _gameAutostarter = new();
     private readonly ModDirectoryOpener _modDirectoryOpener = new();
+    private readonly ModFinder _modFinder = new();
     private ScrollView _modList;
     private Label _noModsLabel;
     private Toggle _buildCode;
@@ -45,8 +42,8 @@ namespace Timberborn.ModdingTools {
       _buildMacAssetBundle = rootVisualElement.Q<Toggle>("MacAssetBundleToggle");
       _buildZipArchive = rootVisualElement.Q<Toggle>("ZipArchiveToggle");
       var zipWarningLabel = rootVisualElement.Q<Label>("ZipWarningLabel");
-      _buildZipArchive.RegisterValueChangedCallback(
-          evt => ToggleDisplayStyle(zipWarningLabel, evt.newValue));
+      _buildZipArchive.RegisterValueChangedCallback(evt => ToggleDisplayStyle(
+                                                        zipWarningLabel, evt.newValue));
       ToggleDisplayStyle(zipWarningLabel, _buildZipArchive.value);
       rootVisualElement.Q<Button>("DevBuildButton")
           .RegisterCallback<ClickEvent>(_ => RunDevBuild());
@@ -66,7 +63,7 @@ namespace Timberborn.ModdingTools {
     }
 
     private void SetModsEnabledState(bool enabled) {
-      foreach (var mod in GetMods(false)) {
+      foreach (var mod in _modFinder.GetAllMods()) {
         _modBuilderControlsPersistence.SetModEnabled(mod, enabled);
       }
       RefreshMods();
@@ -74,25 +71,10 @@ namespace Timberborn.ModdingTools {
 
     private void RefreshMods() {
       _modList.Clear();
-      foreach (var mod in GetMods(false)) {
+      foreach (var mod in _modFinder.GetAllMods()) {
         _modList.Add(AddModItem(mod));
       }
       ToggleDisplayStyle(_noModsLabel, _modList.childCount == 0);
-    }
-
-    private IEnumerable<ModDefinition> GetMods(bool enabledOnly) {
-      var projectPath = Path.GetDirectoryName(Application.dataPath);
-      foreach (var modFolder in AssetDatabase.GetSubFolders(ModsDirectory)) {
-        var manifestPath = $"{modFolder}/{ModManifest}";
-        var manifestAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(manifestPath);
-        if (manifestAsset) {
-          var modDefinition = new ModDefinition(modFolder.Replace(ModsDirectory + "/", ""),
-                                                modFolder, $"{projectPath}/{modFolder}");
-          if (!enabledOnly || _modBuilderControlsPersistence.IsModEnabled(modDefinition)) {
-            yield return modDefinition;
-          }
-        }
-      }
     }
 
     private VisualElement AddModItem(ModDefinition modDefinition) {
@@ -100,8 +82,9 @@ namespace Timberborn.ModdingTools {
           value = _modBuilderControlsPersistence.IsModEnabled(modDefinition),
           text = modDefinition.Name
       };
-      toggle.RegisterValueChangedCallback(
-          evt => _modBuilderControlsPersistence.SetModEnabled(modDefinition, evt.newValue));
+      toggle.RegisterValueChangedCallback(evt =>
+                                              _modBuilderControlsPersistence.SetModEnabled(
+                                                  modDefinition, evt.newValue));
       return toggle;
     }
 
@@ -123,7 +106,7 @@ namespace Timberborn.ModdingTools {
     }
 
     private void RunBuild(ModBuilderSettings modBuilderSettings) {
-      var result = new ModBuilder(GetMods(true), modBuilderSettings).Build();
+      var result = new ModBuilder(_modFinder.GetEnabledMods(), modBuilderSettings).Build();
       if (result) {
         Debug.Log("Build completed successfully");
         _gameAutostarter.StartGameIfEnabled();

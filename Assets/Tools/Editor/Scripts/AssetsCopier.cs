@@ -4,7 +4,7 @@ using System.Linq;
 namespace Timberborn.ModdingTools {
   internal class AssetsCopier {
 
-    private static readonly string DataDirectory = "Data";
+    public static readonly string DataDirectory = "Data";
     private static readonly string RootDirectory = "Root";
     private static readonly string ManifestFileName = "manifest.json";
 
@@ -14,7 +14,7 @@ namespace Timberborn.ModdingTools {
     }
 
     public void CopyFiles(ModDefinition modDefinition, DirectoryInfo modDirectory,
-                              DirectoryInfo rootDirectory) {
+                          DirectoryInfo rootDirectory) {
       CopyFiles(modDefinition, DataDirectory, modDirectory);
       CopyFiles(modDefinition, RootDirectory, rootDirectory);
     }
