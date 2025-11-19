@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.AssetsImporting {
   [InitializeOnLoad]
   internal class ColorSpaceFixer {
 

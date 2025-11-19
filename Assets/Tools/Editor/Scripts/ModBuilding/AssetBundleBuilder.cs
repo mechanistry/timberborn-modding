@@ -1,9 +1,10 @@
 ﻿using System.IO;
 using System.Linq;
+using Timberborn.ModdingTools.Common;
 using UnityEditor;
 using UnityEngine;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.ModBuilding {
   internal class AssetBundleBuilder {
 
     private static readonly string AssetBundlesDirectory = "AssetBundles";

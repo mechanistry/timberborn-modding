@@ -1,4 +1,4 @@
-﻿namespace Timberborn.ModdingTools {
+﻿namespace Timberborn.ModdingTools.ModBuilding {
   public readonly struct ModBuilderSettings {
 
     public bool BuildCode { get; }

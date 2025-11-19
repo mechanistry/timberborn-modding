@@ -3,20 +3,11 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace Timberborn.ModdingTools {
-  internal class ModFinder {
+namespace Timberborn.ModdingTools.Common {
+  public class ModFinder {
 
     private static readonly string ModsDirectory = "Assets/Mods";
     private static readonly string ModManifest = "manifest.json";
-    private readonly ModBuilderControlsPersistence _modBuilderControlsPersistence = new();
-
-    public IEnumerable<ModDefinition> GetEnabledMods() {
-      foreach (var modDefinition in GetAllMods()) {
-        if (_modBuilderControlsPersistence.IsModEnabled(modDefinition)) {
-          yield return modDefinition;
-        }
-      }
-    }
 
     public IEnumerable<ModDefinition> GetAllMods() {
       var projectPath = Path.GetDirectoryName(Application.dataPath);

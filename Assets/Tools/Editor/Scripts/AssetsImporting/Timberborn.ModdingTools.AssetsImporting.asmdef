@@ -1,0 +1,13 @@
+{
+  "name": "Timberborn.ModdingTools.AssetsImporting",
+  "references": [
+    "Timberborn.ModdingTools.Common"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "rootNamespace": "Timberborn.ModdingTools.AssetsImporting",
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": false
+}

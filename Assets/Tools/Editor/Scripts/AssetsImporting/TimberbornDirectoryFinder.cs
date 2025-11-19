@@ -1,8 +1,9 @@
 ﻿using System.IO;
+using Timberborn.ModdingTools.Common;
 using UnityEditor;
 using UnityEngine;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.AssetsImporting {
   internal class TimberbornDirectoryFinder {
 
     private static readonly string MacNotFoundMessage =

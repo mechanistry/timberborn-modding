@@ -1,0 +1,13 @@
+{
+  "name": "Timberborn.ModdingTools.ModBuilding",
+  "references": [
+    "GUID:4f6cfd40fabd4c0cb2eb95236b933399"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "rootNamespace": "Timberborn.ModdingTools.ModBuilding",
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": false
+}

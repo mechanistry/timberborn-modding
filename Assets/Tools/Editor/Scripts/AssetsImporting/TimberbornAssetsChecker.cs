@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEditor;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.AssetsImporting {
   [InitializeOnLoad]
   internal static class TimberbornAssetsChecker {
 

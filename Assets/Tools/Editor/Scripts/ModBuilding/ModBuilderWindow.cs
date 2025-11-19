@@ -1,8 +1,10 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using Timberborn.ModdingTools.Common;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.ModBuilding {
   internal class ModBuilderWindow : EditorWindow {
 
     private readonly ModBuilderControlsPersistence _modBuilderControlsPersistence = new();
@@ -106,11 +108,19 @@ namespace Timberborn.ModdingTools {
     }
 
     private void RunBuild(ModBuilderSettings modBuilderSettings) {
-      var result = new ModBuilder(_modFinder.GetEnabledMods(), modBuilderSettings).Build();
+      var result = new ModBuilder(GetEnabledMods(), modBuilderSettings).Build();
       if (result) {
         Debug.Log("Build completed successfully");
         _gameAutostarter.StartGameIfEnabled();
         _modDirectoryOpener.OpenDirectoryIfEnabled();
+      }
+    }
+
+    private IEnumerable<ModDefinition> GetEnabledMods() {
+      foreach (var mod in _modFinder.GetAllMods()) {
+        if (_modBuilderControlsPersistence.IsModEnabled(mod)) {
+          yield return mod;
+        }
       }
     }
 

@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.AssetsImporting {
   internal class DllPublicizer {
 
     private static readonly string SerializedFieldAttribute = typeof(SerializeField).FullName;

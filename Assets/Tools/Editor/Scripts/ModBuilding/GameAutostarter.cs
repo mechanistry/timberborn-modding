@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Debug = UnityEngine.Debug;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.ModBuilding {
   internal class GameAutostarter {
 
     private static readonly string AppId = "1062090";
@@ -19,8 +19,8 @@ namespace Timberborn.ModdingTools {
     public void Initialize(VisualElement rootVisualElement) {
       _autostartToggle = rootVisualElement.Q<Toggle>("AutostartToggle");
       var autostartValues = rootVisualElement.Q<VisualElement>("AutostartValues");
-      _autostartToggle.RegisterValueChangedCallback(
-          evt => ToggleDisplayStyle(autostartValues, evt.newValue));
+      _autostartToggle.RegisterValueChangedCallback(evt => ToggleDisplayStyle(
+                                                        autostartValues, evt.newValue));
 
       _runOnSteamToggle = rootVisualElement.Q<Toggle>("RunOnSteamToggle");
       _runOnSteamToggle.RegisterValueChangedCallback(evt => ToggleDisplayStyle(_gamePath,
@@ -45,11 +45,11 @@ namespace Timberborn.ModdingTools {
         }
       }
     }
-    
+
     private static void ToggleDisplayStyle(VisualElement visualElement, bool visible) {
       visualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
-    
+
     private void RunOnSteam() {
       Application.OpenURL($"steam://run/{AppId}//{GetCustomArguments("\\")}/");
     }
@@ -69,7 +69,7 @@ namespace Timberborn.ModdingTools {
         Debug.Log($"Game path does not exist: {gamePath}");
       }
     }
-    
+
     private string GetCustomArguments(string escapeCharacter) {
       return $"{_customArguments.value}{GetStartArguments(escapeCharacter)}";
     }

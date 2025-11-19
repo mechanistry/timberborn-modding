@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Timberborn.AssetSystem;
+using Timberborn.ModdingTools.Common;
+using Timberborn.ModdingTools.ModBuilding;
 using UnityEditor;
 using UnityEngine;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.AssetsManagement {
   [UsedImplicitly]
   internal class ModDataAssetProvider : IAssetProvider {
 

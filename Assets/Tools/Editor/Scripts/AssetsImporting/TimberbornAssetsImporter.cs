@@ -7,7 +7,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.AssetsImporting {
   internal class TimberbornAssetsImporter : EditorWindow {
 
     public static readonly string DllPath =

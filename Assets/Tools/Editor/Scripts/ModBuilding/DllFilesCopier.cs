@@ -1,8 +1,9 @@
 ﻿using System.IO;
+using Timberborn.ModdingTools.Common;
 using UnityEditor;
 using UnityEngine;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.ModBuilding {
   internal class DllFilesCopier {
 
     private static readonly string WindowsBuildPostfix = "_Data";

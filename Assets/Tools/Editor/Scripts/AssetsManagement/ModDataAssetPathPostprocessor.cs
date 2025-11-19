@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using Timberborn.AssetSystem.Editor;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.AssetsManagement {
   [UsedImplicitly]
   internal class ModDataAssetPathPostprocessor : IEditorAssetPathProcessor {
 

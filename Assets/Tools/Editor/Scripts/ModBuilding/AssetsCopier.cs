@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using System.Linq;
+using Timberborn.ModdingTools.Common;
 
-namespace Timberborn.ModdingTools {
-  internal class AssetsCopier {
+namespace Timberborn.ModdingTools.ModBuilding {
+  public class AssetsCopier {
 
     public static readonly string DataDirectory = "Data";
     private static readonly string RootDirectory = "Root";

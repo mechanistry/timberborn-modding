@@ -1,8 +1,9 @@
 ﻿using System.Diagnostics;
+using Timberborn.ModdingTools.Common;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Timberborn.ModdingTools {
+namespace Timberborn.ModdingTools.ModBuilding {
   internal class ModDirectoryOpener {
 
     private readonly ModBuilderControlsPersistence _modBuilderControlsPersistence = new();

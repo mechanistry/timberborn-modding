@@ -1,5 +1,5 @@
-﻿namespace Timberborn.ModdingTools {
-  internal readonly struct ModDefinition {
+﻿namespace Timberborn.ModdingTools.Common {
+  public readonly struct ModDefinition {
 
     public string Name { get; }
     public string ProjectPath { get; }

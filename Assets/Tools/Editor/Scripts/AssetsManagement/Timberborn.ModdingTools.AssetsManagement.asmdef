@@ -1,0 +1,14 @@
+{
+  "name": "Timberborn.ModdingTools.AssetsManagement",
+  "references": [
+    "Timberborn.ModdingTools.Common",
+    "Timberborn.ModdingTools.ModBuilding"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "rootNamespace": "Timberborn.ModdingTools.AssetsManagement",
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "autoReferenced": false
+}

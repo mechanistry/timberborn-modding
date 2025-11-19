@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 
-namespace Timberborn.ModdingTools {
-  internal class TimberbornPathPersistence {
+namespace Timberborn.ModdingTools.Common {
+  public class TimberbornPathPersistence {
 
     private static readonly string TimberbornPathKey = "TimberbornPath";
 
