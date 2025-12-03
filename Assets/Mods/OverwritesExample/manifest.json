@@ -1,6 +1,6 @@
 {
   "Name": "Overwrites example",
-  "Version": "1.0.0.0",
+  "Version": "1.0.5.0",
   "Id": "Timberborn.ModExamples.Overwrites",
   "MinimumGameVersion": "1.0.0.0",
   "Description": "Example mod that overwrites some game content",
