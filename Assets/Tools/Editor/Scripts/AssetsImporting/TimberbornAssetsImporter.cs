@@ -23,7 +23,7 @@ namespace Timberborn.ModdingTools.AssetsImporting {
     private static readonly string EditorDllKey = "EditorDll";
     private static readonly string EditorUIKey = "EditorUI";
     private static readonly List<string> ExcludedDllPrefixes = new()
-        { "Mono.", "mscorlib.", "Newtonsoft.", "netstandard", "System.", "Unity.", "UnityEngine." };
+        { "Mono.", "mscorlib.", "netstandard", "System.", "Unity.", "UnityEngine." };
     private static readonly List<string> AlwaysImportedDlls = new() {
         "System.Collections.Immutable.dll",
         "System.Runtime.CompilerServices.Unsafe.dll",
