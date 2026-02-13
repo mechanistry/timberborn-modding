@@ -79,11 +79,16 @@ namespace Timberborn.ModdingTools.AssetsImporting {
         DllPublicizer.PublicizeDLL(destination, file.Directory);
       }
 
-      using var metaFile = File.CreateText(destination + ".meta");
-      metaFile.WriteLine("fileFormatVersion: 2");
-      metaFile.WriteLine("guid: " + GenerateGuid(file.Name));
+      GenerateMetaWithPersistentGuid(file.Name, destination);
     }
 
+    private static void GenerateMetaWithPersistentGuid(string fileName, string destination) {
+      using var metaFile = File.CreateText(destination + ".meta");
+      metaFile.WriteLine("fileFormatVersion: 2");
+      metaFile.WriteLine("guid: " + GenerateGuid(fileName));
+    }
+
+    //This algorithm is consistent with how AsserRipper generates guids for extracted assets
     private static string GenerateGuid(string fileName) {
       using var md5 = MD5.Create();
       var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
@@ -97,7 +102,7 @@ namespace Timberborn.ModdingTools.AssetsImporting {
       Import(BlueprintsKey, streamingAssetsDirectory);
       Import(LocalizationsKey, streamingAssetsDirectory, LocalizationsKey);
       Import(UIKey, streamingAssetsDirectory, UIKey, ".txt");
-      Import(EditorDllKey, streamingAssetsDirectory, EditorDllKey);
+      Import(EditorDllKey, streamingAssetsDirectory, EditorDllKey, "", true);
       Import(EditorUIKey, streamingAssetsDirectory, UIKey);
     }
 
@@ -109,22 +114,26 @@ namespace Timberborn.ModdingTools.AssetsImporting {
     }
 
     private static void Import(string name, DirectoryInfo streamingAssetsDirectory,
-                               string destinationDirectory = "", string fileExtension = "") {
+                               string destinationDirectory = "", string fileExtension = "",
+                               bool generateMeta = false) {
       var destinationPath = Path.Combine(ResourcesPath, destinationDirectory);
       var sourcePath = Path.Combine(streamingAssetsDirectory.FullName, "Modding", $"{name}.zip");
       if (File.Exists(sourcePath)) {
-        Import(destinationPath, sourcePath, name, fileExtension);
+        Import(destinationPath, sourcePath, name, fileExtension, generateMeta);
       } else {
         Debug.LogWarning($"Unable to import: {name}. Zip file not found at {sourcePath}");
       }
     }
 
     private static void Import(string destinationPath, string sourcePath, string name,
-                               string fileExtension) {
+                               string fileExtension, bool generateMeta) {
       using var zipToOpen = new FileStream(sourcePath, FileMode.Open);
       using var archive = new ZipArchive(zipToOpen, ZipArchiveMode.Read);
       foreach (var entry in archive.Entries) {
         ImportEntry(destinationPath, entry, fileExtension);
+        if (generateMeta) {
+          GenerateMetaWithPersistentGuid(entry.Name, Path.Combine(destinationPath, entry.Name));
+        }
       }
       Debug.Log($"Timberborn {name} ({archive.Entries.Count} files) imported successfully.");
     }
