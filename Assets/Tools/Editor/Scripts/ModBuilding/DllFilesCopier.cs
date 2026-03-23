@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using Newtonsoft.Json;
+using System.IO;
+using System.Linq;
 using Timberborn.ModdingTools.Common;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +18,11 @@ namespace Timberborn.ModdingTools.ModBuilding {
       var modAsmdefs = AssetDatabase.FindAssets("t:asmdef", new[] { modDefinition.ProjectPath });
       foreach (var asmdef in modAsmdefs) {
         var asmdefPath = AssetDatabase.GUIDToAssetPath(asmdef);
+        var content = JsonConvert.DeserializeAnonymousType(File.ReadAllText(asmdefPath), new { defineConstraints = new string[] { } });
+        if (content.defineConstraints.Contains("UNITY_INCLUDE_TESTS"))
+        {
+          continue;
+        }
         var asmdefName = Path.GetFileNameWithoutExtension(asmdefPath);
         var dllSourcePath = Path.Combine(dllDirectory, $"{asmdefName}.dll");
         var dllDestination = Path.Combine(modDirectory.FullName, GameModDllDirectory);
