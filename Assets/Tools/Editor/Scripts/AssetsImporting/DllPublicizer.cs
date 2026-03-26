@@ -11,6 +11,7 @@ using Object = UnityEngine.Object;
 namespace Timberborn.ModdingTools.AssetsImporting {
   internal class DllPublicizer {
 
+    private static readonly string EqualityContractPropertyName = "EqualityContract";
     private static readonly string SerializedFieldAttribute = typeof(SerializeField).FullName;
     private static readonly string CompilerGeneratedAttribute =
         typeof(CompilerGeneratedAttribute).FullName;
@@ -39,32 +40,17 @@ namespace Timberborn.ModdingTools.AssetsImporting {
     }
 
     private static void Publicize(Collection<TypeDefinition> types, ModuleDefinition module) {
-      var hideInInspectorConstructor = new Lazy<MethodReference>(
-          () => module.ImportReference(typeof(HideInInspector).GetConstructor(Type.EmptyTypes)));
+      var hideInInspectorConstructor =
+          new Lazy<MethodReference>(() => module.ImportReference(
+                                        typeof(HideInInspector).GetConstructor(Type.EmptyTypes)));
       var objectTypeDefinition = module.ImportReference(typeof(Object)).Resolve();
 
       foreach (var type in types) {
         if (IsNotCompilerGenerated(type)) {
-          if (type.IsNested) {
-            type.IsNestedPublic = true;
-          } else {
-            type.IsPublic = true;
-          }
-          foreach (var method in type.Methods) {
-            if (IsNotCompilerGenerated(method)) {
-              method.IsPublic = true;
-            }
-          }
-          var isUnityObject = IsSubclassOf(type, objectTypeDefinition);
-          foreach (var field in type.Fields) {
-            if (IsNotCompilerGenerated(field)) {
-              if (isUnityObject && HideInInspector(field)) {
-                field.CustomAttributes.Add(new(hideInInspectorConstructor.Value));
-              }
-              field.IsPublic = true;
-            }
-          }
-
+          PublicizeType(type);
+          PublicizeMethods(type);
+          PublicizeProperties(type);
+          PublicizeFields(type, objectTypeDefinition, hideInInspectorConstructor);
           Publicize(type.NestedTypes, module);
         }
       }
@@ -73,6 +59,50 @@ namespace Timberborn.ModdingTools.AssetsImporting {
     private static bool IsNotCompilerGenerated(ICustomAttributeProvider customAttributeProvider) {
       return customAttributeProvider.CustomAttributes.All(a => a.AttributeType.FullName
                                                                != CompilerGeneratedAttribute);
+    }
+
+    private static void PublicizeType(TypeDefinition type) {
+      if (type.IsNested) {
+        type.IsNestedPublic = true;
+      } else {
+        type.IsPublic = true;
+      }
+    }
+
+    private static void PublicizeMethods(TypeDefinition type) {
+      foreach (var method in type.Methods) {
+        if (IsNotCompilerGenerated(method)) {
+          method.IsPublic = true;
+        }
+      }
+    }
+
+    private static void PublicizeProperties(TypeDefinition type) {
+      foreach (var property in type.Properties) {
+        if (property.Name != EqualityContractPropertyName) {
+          PublicizeMethod(property.GetMethod);
+          PublicizeMethod(property.SetMethod);
+        }
+      }
+    }
+
+    private static void PublicizeMethod(MethodDefinition method) {
+      if (method != null) {
+        method.IsPublic = true;
+      }
+    }
+
+    private static void PublicizeFields(TypeDefinition type, TypeDefinition objectTypeDefinition,
+                                        Lazy<MethodReference> hideInInspectorConstructor) {
+      var isUnityObject = IsSubclassOf(type, objectTypeDefinition);
+      foreach (var field in type.Fields) {
+        if (IsNotCompilerGenerated(field)) {
+          if (isUnityObject && HideInInspector(field)) {
+            field.CustomAttributes.Add(new(hideInInspectorConstructor.Value));
+          }
+          field.IsPublic = true;
+        }
+      }
     }
 
     private static bool IsSubclassOf(TypeDefinition childTypeDefinition,
