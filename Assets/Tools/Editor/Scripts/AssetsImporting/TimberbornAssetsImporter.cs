@@ -104,6 +104,7 @@ namespace Timberborn.ModdingTools.AssetsImporting {
       Import(UIKey, streamingAssetsDirectory, UIKey, ".txt");
       Import(EditorDllKey, streamingAssetsDirectory, EditorDllKey, "", true);
       Import(EditorUIKey, streamingAssetsDirectory, UIKey);
+      ImportRawFile("TimberbornExampleModels.blend", streamingAssetsDirectory);
     }
 
     private static void RecreateDirectory(string path) {
@@ -147,6 +148,15 @@ namespace Timberborn.ModdingTools.AssetsImporting {
         Directory.CreateDirectory(entryDirectory);
       }
       entry.ExtractToFile(destination, true);
+    }
+
+    private static void ImportRawFile(string fileName, DirectoryInfo streamingAssetsDirectory) {
+      var path = Path.Combine(streamingAssetsDirectory.FullName, "Modding", fileName);
+      var fileInfo = new FileInfo(path);
+      if (fileInfo.Exists) {
+        var destinationPath = Path.Combine(ImportedAssetsPath, fileInfo.Name);
+        File.Copy(fileInfo.FullName, destinationPath, true);
+      }
     }
 
   }
