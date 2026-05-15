@@ -9,6 +9,7 @@ namespace Timberborn.ModdingTools.ModBuilding {
 
     private static readonly string EditorPrefsKey = "ModBuilderControlsPersistence";
     private static readonly string ModEnabledKey = "ModBuilderWindow.ModEnabled.{0}";
+    private static readonly string CompatibilityVersionPath = Path.Combine(Application.dataPath, "compatibility.txt");
     private readonly TimberbornPathPersistence _timberbornPathPersistence = new();
 
     public void InitializeBuildControls(Toggle buildCode, Toggle buildWindowsAssetBundle,
@@ -27,10 +28,15 @@ namespace Timberborn.ModdingTools.ModBuilding {
       buildZipArchive.value = EditorPrefs.GetBool(GetKey(buildZipArchive.name), false);
       buildZipArchive.RegisterValueChangedCallback(
           evt => EditorPrefs.SetBool(GetKey(buildZipArchive.name), evt.newValue));
-      compatibilityVersion.value = EditorPrefs.GetString(GetKey(compatibilityVersion.name),
-                                                         string.Empty);
+      compatibilityVersion.value = File.Exists(CompatibilityVersionPath) ?
+	      File.ReadAllText(CompatibilityVersionPath) :
+	      EditorPrefs.GetString(GetKey(compatibilityVersion.name), string.Empty);
       compatibilityVersion.RegisterValueChangedCallback(
-          evt => EditorPrefs.SetString(GetKey(compatibilityVersion.name), evt.newValue));
+          evt =>
+          {
+	          File.WriteAllText(CompatibilityVersionPath, evt.newValue);
+	          EditorPrefs.SetString(GetKey(compatibilityVersion.name), evt.newValue);
+          });
     }
 
     public void InitializeAutostartControls(Toggle autostartToggle, Toggle runOnSteamToggle,
