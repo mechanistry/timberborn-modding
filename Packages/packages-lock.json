@@ -17,7 +17,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.burst": {
-      "version": "1.8.29",
+      "version": "1.8.30",
       "depth": 1,
       "source": "registry",
       "dependencies": {
@@ -79,7 +79,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
-      "version": "1.19.0",
+      "version": "1.20.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -121,7 +121,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.recorder": {
-      "version": "5.1.6",
+      "version": "5.1.7",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -161,7 +161,7 @@
       }
     },
     "com.unity.searcher": {
-      "version": "4.9.4",
+      "version": "4.9.5",
       "depth": 2,
       "source": "registry",
       "dependencies": {},
@@ -197,7 +197,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.8.12",
+      "version": "1.8.13",
       "depth": 1,
       "source": "registry",
       "dependencies": {
