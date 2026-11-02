@@ -6,7 +6,7 @@
     "DaysToDieDry": 5.0
   },
   "CuttableSpec": {
-    "YielderSpec": {
+    "Yielder": {
       "Yield": {
         "Amount": 4
       }
