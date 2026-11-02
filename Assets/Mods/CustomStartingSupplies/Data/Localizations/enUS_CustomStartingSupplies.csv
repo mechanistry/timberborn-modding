@@ -1,0 +1,3 @@
+ID,Text,Comment
+CustomStartingSupplies.ExtraSupplies.DisplayName,Normal (Extra Supplies),Name of the optional starting-supplies game mode.
+CustomStartingSupplies.ExtraSupplies.Description,Normal difficulty with 260 berries and 130 water in your starting district center. All other settings match Normal.,Description shown when choosing a new-game preset.
