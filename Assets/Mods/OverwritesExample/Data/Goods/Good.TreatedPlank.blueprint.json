@@ -1,8 +1,6 @@
 {
   "GoodSpec": {
     "StockpileVisualization": "Plank",
-    "VisibleContainer": {
-      "Value": "Plank"
-    }
+    "VisibleContainer": "Plank"
   }
 }
